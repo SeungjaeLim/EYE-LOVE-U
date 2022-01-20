@@ -7,7 +7,7 @@ function App() {
   const element = useRoutes([
     {path: '/', element: <Auth/>},
     {path: '/register', element: <Register/>},
-    {path: '/calibraion', element: <Calibration/>},
+    {path: '/calibration', element: <Calibration/>},
     {path: '/lobby', element: <Lobby/>},
     {path: '/post', element: <Post/>},
     {path: '/manmatching', element: <ManMatching/>},
