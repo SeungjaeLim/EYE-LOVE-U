@@ -1,21 +1,22 @@
 import './App.css';
-import {useEffect} from 'react'
+import { Auth, Register, Calibration, Lobby, Post, ManMatching, WomanMatching, SendPost} from './pages';
+import {useRoutes} from 'react-router-dom';
+import {useState} from 'react';
 
 function App() {
-  useEffect(()=>{
-    const webgazer = window.webgazer
-    webgazer.setGazeListener((data, clock)=>{
-      console.log(data, clock);
-    }).begin()
-  })
+  const element = useRoutes([
+    {path: '/', element: <Auth/>},
+    {path: '/register', element: <Register/>},
+    {path: '/calibraion', element: <Calibration/>},
+    {path: '/lobby', element: <Lobby/>},
+    {path: '/post', element: <Post/>},
+    {path: '/manmatching', element: <ManMatching/>},
+    {path: '/wonmanmatching', element: <WomanMatching/>},
+    {path: '/sendpost', element: <SendPost/>}
+  ])
   
   
-  return (
-    
-    <div className="App">
-      hello
-    </div>
-  );
+  return element;
 }
 
 export default App;
