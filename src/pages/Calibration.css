@@ -1,0 +1,31 @@
+.top1{
+    height:25vh;
+}
+.top2{
+    height: 10vh;
+}
+.pictures{
+    display: flex;
+    flex-direction: row;
+}
+
+.picture1{
+    margin-left: 5px;
+    width:300px;
+    height:300px;
+    margin:100px;
+    background-color: blue;
+    display:inline-block;
+}
+.picture2{
+    margin-left: 5px;
+    width:300px;
+    height:300px;
+    margin:100px;
+    background-color: green;
+    display:inline-block;
+}
+
+/* .style{
+    
+}; */
