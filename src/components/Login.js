@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
- 
+    
+    const navigate = useNavigate();
 	// input data 의 변화가 있을 때마다 value 값을 변경해서 useState 해준다
     const handleInputId = (e) => {
         setInputId(e.target.value)
@@ -22,6 +24,12 @@ function Login() {
         })
         .then(res => console.log(res))
         .catch()
+        navigate(`/lobby`);
+        
+    }
+
+    const onClickRegister = (target) => {
+        navigate(`/${target}`);
     }
  
     return(
@@ -37,6 +45,11 @@ function Login() {
             </div>
             <div>
                 <button type='button' onClick={onClickLogin}>Login</button>
+            </div>
+            <div className="RegisterButton" onClick={(e) => {
+                e.preventDefault();
+                onClickRegister("register"); }}>
+                계정이 없으신가요?
             </div>
         </div>
     )
