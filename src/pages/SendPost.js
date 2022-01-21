@@ -15,6 +15,7 @@ function SendPost() {
   const onSendMail = (e) => {
     e.preventDefault();
     console.log(e.target.message.value);
+    navigate('/lobby');
   }
 
   return (
