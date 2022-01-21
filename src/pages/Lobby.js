@@ -44,6 +44,48 @@ function Lobby() {
         senderPhone: "01033333333",
         senderPhoto: "abc.png",
         reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
+      },
+      {
+        id: 789,
+        senderId: "gwe",
+        senderPhone: "01033333333",
+        senderPhoto: "abc.png",
+        reciverId: "mlm"
       }
     ])
   }, []);
@@ -103,12 +145,6 @@ function Lobby() {
         Matching
       </div>
       
-      <div onClick={(e) => {
-        e.preventDefault();
-        onClick("post");
-      }}>
-        Post
-      </div>
     </div>
   ); 
 }
