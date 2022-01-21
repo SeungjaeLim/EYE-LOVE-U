@@ -7,22 +7,47 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Transition = React.forwardRef(function Transition(props, ref){
   return <Slide direction='up' ref={ref} {...props} />;
 })
 
+const TransitionMypage = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="left" ref={ref} {...props} />;
+});
+
 function Lobby() {
   const navigate = useNavigate();
   const sex = "M";
   const [ postList, setPostList ] = useState([]);
+  const [ userInfo, setUserInfo ] = useState({});
   const [ listOpen, setListOpen ] = useState(false);
+  const [ profileOpen, setProfileOpen ] = useState(false);
 
   const onClick = (target) => {
     navigate(`/${target}`);
   }
 
+  const onProfileClick = (e) => {
+    e.preventDefault();
+    setProfileOpen(true);
+  }
+
+  const onProfileClose = (e) => {
+    e.preventDefault();
+    setProfileOpen(false);
+  }
+  
   useEffect(() => {
+    setUserInfo(
+      {
+        id : "seungjae",
+        phoneNumber : "01033333333",
+        photo : "abc.jpg",
+        sex : "M"
+      }
+    )
     setPostList([
       {
         id: 123,
@@ -112,6 +137,30 @@ function Lobby() {
 
   return (
     <div>
+      <AccountCircleIcon
+        sx={{ fontSize: 80 }}
+        onClick={onProfileClick} />
+      <Dialog
+        open={profileOpen}
+        onClose={onProfileClose}
+        TransitionComponent={TransitionMypage}
+        aria-describedby="alert-dialog-slide-description" >
+        <div>
+          <div>
+            <CloseIcon onClick={onProfileClose}/>
+          </div>
+          <div className="HomeUserStatusNick">{userInfo.id}</div>
+          <div className="HomeUserStatusOther">
+            <div className="HomeUserStatusOtherStat">
+              <div>{userInfo.phoneNumber}</div>
+            </div>
+            <div className="HomeUserStatusOtherStat">
+              <div>{userInfo.sex}</div>
+            </div>
+          </div>
+        </div>
+      </Dialog>
+
       <div>
         <div onClick={() => showList()}>
           postList
