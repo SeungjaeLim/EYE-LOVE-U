@@ -4,8 +4,9 @@ import {useRoutes} from 'react-router-dom';
 import {useState} from 'react';
 
 function App() {
+  const [ userId, setUserId ] = useState("");
   const element = useRoutes([
-    {path: '/', element: <Auth/>},
+    {path: '/', element: <Auth setUserId={setUserId} />},
     {path: '/register', element: <Register/>},
     {path: '/calibration', element: <Calibration/>},
     {path: '/lobby', element: <Lobby/>},
