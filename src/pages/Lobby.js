@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import PostListItem from "../components/PostListItem";
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,16 +9,17 @@ import ListItem from '@mui/material/ListItem';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
+
+import "../style/Lobby.css";
+
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 const Transition = React.forwardRef(function Transition(props, ref){
-  return <Slide direction='up' ref={ref} {...props} />;
+  return <Slide direction='left' ref={ref} {...props} />;
 })
 
-const TransitionMypage = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="left" ref={ref} {...props} />;
-});
-
-function Lobby() {
+function Lobby({ userId }) {
   const navigate = useNavigate();
   const sex = "M";
   const [ postList, setPostList ] = useState([]);
@@ -40,14 +42,15 @@ function Lobby() {
   }
   
   useEffect(() => {
-    setUserInfo(
-      {
-        id : "seungjae",
-        phoneNumber : "01033333333",
-        photo : "abc.jpg",
-        sex : "M"
-      }
-    )
+    axios.get(`${API_BASE}/auth/info?user_id=${userId}`)
+    .then(res => {
+      setUserInfo({
+        id: res.data.id,
+        sex: res.data.sex,
+        phoneNumber: res.data.phoneNumber
+      });
+    })
+    .catch(err => console.log(err));  
     setPostList([
       {
         id: 123,
@@ -136,36 +139,36 @@ function Lobby() {
   }
 
   return (
-    <div>
+    <div className='Lobby'>
       <AccountCircleIcon
         sx={{ fontSize: 80 }}
+        className='LobbyProfileIcon'
         onClick={onProfileClick} />
       <Dialog
         open={profileOpen}
         onClose={onProfileClose}
-        TransitionComponent={TransitionMypage}
+        TransitionComponent={Transition}
         aria-describedby="alert-dialog-slide-description" >
-        <div>
-          <div>
+        <div className='LobbyUserStatus'>
+          <div className='LobbyUserStatusClose'>
             <CloseIcon onClick={onProfileClose}/>
           </div>
-          <div className="HomeUserStatusNick">{userInfo.id}</div>
-          <div className="HomeUserStatusOther">
-            <div className="HomeUserStatusOtherStat">
+          <img className="LobbyUserStatusImg" src={`/logo192.png`}/>
+          <div className="LobbyUserStatusId">{userInfo.id}</div>
+          <div className="LobbyUserStatusOther">
+            <div className="LobbyUserStatusOtherStat">
               <div>{userInfo.phoneNumber}</div>
             </div>
-            <div className="HomeUserStatusOtherStat">
+            <div className="LobbyUserStatusOtherStat">
               <div>{userInfo.sex}</div>
             </div>
           </div>
         </div>
       </Dialog>
 
-      <div>
-        <div onClick={() => showList()}>
-          postList
-        </div>
-      </div>
+      <LocalPostOfficeIcon
+        sx={{ fontSize: 80 }}
+        onClick={() => showList()} />
       <Dialog
         open={listOpen}
         TransitionComponent={Transition}
