@@ -19,7 +19,7 @@ const Transition = React.forwardRef(function Transition(props, ref){
   return <Slide direction='left' ref={ref} {...props} />;
 })
 
-function Lobby({ userId }) {
+function Lobby({ userId, setUserId }) {
   const navigate = useNavigate();
   const sex = "M";
   const [ postList, setPostList ] = useState([]);
@@ -42,7 +42,8 @@ function Lobby({ userId }) {
   }
   
   useEffect(() => {
-    axios.get(`${API_BASE}/auth/info?user_id=${userId}`)
+    setUserId(window.sessionStorage.getItem('userId'));
+    axios.get(`${API_BASE}/auth/info?user_id=${window.sessionStorage.getItem('userId')}`)
     .then(res => {
       setUserInfo({
         id: res.data.id,
@@ -116,7 +117,7 @@ function Lobby({ userId }) {
         reciverId: "mlm"
       }
     ])
-  }, []);
+  }, [userId]);
 
   const onPostClick = (id) => {
     if(window.confirm(`${id}에게 답장하시겠습니까?`)) {

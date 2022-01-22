@@ -9,7 +9,7 @@ function App() {
     {path: '/', element: <Auth setUserId={setUserId} />},
     {path: '/register', element: <Register/>},
     {path: '/calibration', element: <Calibration/>},
-    {path: '/lobby', element: <Lobby userId={userId}/>},
+    {path: '/lobby', element: <Lobby userId={userId} setUserId={setUserId} />},
     {path: '/manmatching', element: <ManMatching/>},
     {path: '/wonmanmatching', element: <WomanMatching/>},
     {path: '/sendpost', element: <SendPost/>}
