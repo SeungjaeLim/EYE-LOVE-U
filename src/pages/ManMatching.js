@@ -1,13 +1,15 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
+import axios from 'axios';
 import './Calibration.css'
 
 export default function ManMatching() {
   const webgazer = window.webgazer
-  let cnt1 =0, cnt2 =0, cnt3 =0, cnt4 =0;
+  let cnt1 =useRef(0), cnt2 = useRef(0), cnt3 = useRef(0), cnt4 = useRef(0);
   const [pictures1, setpictures1] = useState([]);
   const [pictures2, setpictures2] = useState([]);
   const [pictures3, setpictures3] = useState([]);
   const [pictures4, setpictures4] = useState([]);
+  const [image1, setimgae1] = useState();
 
   useEffect(()=>{
     //그림1 상하좌우 좌표
@@ -33,37 +35,48 @@ export default function ManMatching() {
     webgazer.showPredictionPoints(false) 
     webgazer.setGazeListener((data, clock)=>{
     }).begin()
-    // axios.get('localhost:8080/api/download?user_id=??')
+
+    axios.get('http://143.248.192.87:8080/api/download?user_id=ImIU',{ responseType: 'arraybuffer' }).then(result => {
+      console.log(result.data);
+      let blob = new Blob([result.data], { type: "image/jpeg" });
+      const url = window.URL.createObjectURL(blob);
+      setimgae1(url);
+      console.log(url);
+    })
 
   }, [])
 
   
   useEffect(()=>{
-    console.log('cnt1', cnt1);
       webgazer.setGazeListener((data, clock)=>{
         if(data == null)
           return;
         if(data.y > pictures1[0] && data.y < pictures1[1] && data.x >pictures1[2] && data.x < pictures1[3]){
-          cnt1 = cnt1 + 1;
-          if(cnt1 > 30 ){
+          // cnt1 = cnt1 + 1;
+          cnt1.current += 1;
+          if(cnt1.current > 30 ){
             window.alert("You Choosed first")
           }
+          // console.log(cnt1);
         }
         else if(data.y > pictures2[0] && data.y < pictures2[1] && data.x >pictures2[2] && data.x < pictures2[3]){
-          cnt2 += 1;
-          if( cnt2 > 30 ){
+          // cnt2 += 1;
+          cnt2.current += 1;
+          if( cnt2.current > 30 ){
             window.alert("You Choosed second")
           }
         }
         else if(data.y > pictures3[0] && data.y < pictures3[1] && data.x >pictures3[2] && data.x < pictures3[3]){
-          cnt3 += 1;
-          if( cnt3 > 30 ){
+          // cnt3 += 1;
+          cnt3.current += 1;
+          if( cnt3.current > 30 ){
             window.alert("You Choosed third")
           }
         }
         else if(data.y > pictures4[0] && data.y < pictures4[1] && data.x >pictures4[2] && data.x < pictures4[3]){
-          cnt4 += 1;
-          if( cnt4 > 30 ){
+          // cnt4 += 1;
+          cnt4.current += 1;
+          if( cnt4.current > 30 ){
             window.alert("You Choosed fourth")
           }
         }
@@ -77,19 +90,27 @@ export default function ManMatching() {
       <div className ='pictures'>
         <div className = 'picturelow'>
           <div >
-            <div className ='picture1'></div>
+            <div className ='picture1'>
+              <img src={image1} className='image' alt="first"/>
+            </div>
           </div>
           <div>
-              <div className ='picture2'></div>
+              <div className ='picture2'>
+                <img src={`iu.jpg`} className='image' alt="second"/>
+              </div>
           </div>
         </div>
 
         <div className = 'picturelow'>
           <div >
-              <div className ='picture3'></div>
+              <div className ='picture3'>
+                <img src={`iu.jpg`} className='image' alt="third"/>
+              </div>
           </div>
           <div>
-              <div className ='picture4'></div>
+              <div className ='picture4'>
+                <img src={`iu.jpg`} className='image' alt="fourth"/>
+              </div>
           </div>
         </div>
       
