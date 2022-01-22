@@ -28,6 +28,7 @@ function Login({ setUserId }) {
             'password': pwd
         })
         .then(res => {
+            console.log(res.data);
             if(res.data.msg) {
                 setAlertOpen(true);
             }
@@ -40,7 +41,6 @@ function Login({ setUserId }) {
         .catch(err =>
             {
                 console.log(err);
-                setAlertOpen(true);
             });
     }
 
