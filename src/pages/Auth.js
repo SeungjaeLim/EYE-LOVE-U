@@ -1,9 +1,9 @@
 import Login from '../components/Login';
 
-export default function Auth() {
+export default function Auth( {setUserId }) {
   return (
     <div>
-      <Login/>
+      <Login setUserId={setUserId} />
     </div>
   );
 }

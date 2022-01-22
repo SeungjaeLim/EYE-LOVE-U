@@ -1,0 +1,59 @@
+.Lobby {
+  width: 100%;
+  height: 100%;
+}
+
+.LobbyProfileIcon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 2rem;
+  margin-right: 2rem;
+}
+
+
+.LobbyUserStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 1.3rem;
+}
+
+.LobbyUserStatusId {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  margin-bottom: 1rem;
+}
+
+.LobbyUserStatusOther {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+}
+
+.LobbyUserStatusOtherStat {
+  margin-bottom: 0.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.LobbyUserStatusClose {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.LobbyUserStatusImg{
+  width: 8rem;
+  height: 8rem;
+}
+
+.HomeRow {
+  width: 100%;
+  height: 14.2857143%;
+  display: flex;
+}
