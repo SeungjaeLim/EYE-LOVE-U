@@ -37,6 +37,9 @@ router.post('/upload', upload.single('file'), (req, res) => {
 router.get('/download',(req, res)=> {
     console.log(req.query.user_id)
     const user_id = req.query.user_id
+    if(user_id==undefined){
+        res.send({ 'msg':  '리퀘스트좀 제대로 날려라'})
+    }
     const sql1 = `SELECT profileImg FROM user WHERE user_id = '${user_id}';`
     db.query(sql1, (err, data) => {
         if(!err) {

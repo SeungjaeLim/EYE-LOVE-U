@@ -8,7 +8,7 @@ const passportConfig = { usernameField: 'userId', passwordField: 'password' };
 router.post('/', (req, res) => {
     
     console.log(req.body);
-    res.send('This is register page');
+    res.send('This is post page');
 });
 
 router.post('/login', (req, res) => {
@@ -35,7 +35,7 @@ router.post('/login', (req, res) => {
                 db.query(sql2, (err, data) => {
                     console.log(data[0]);
                     if(!err) {
-                        if(data[0].userId==null){
+                        if(data[0].userId==undefined){
                             res.send({ 'msg': '입력하신 id 가 일치하지 않습니다.'})
                         }
                         else {
@@ -52,29 +52,37 @@ router.post('/login', (req, res) => {
     })
 });
 
-router.post('/register', (req, res) =>{
-    // user_id, user_pw 변수로 선언
-    const user_id = req.body.user_id
-    const password = req.body.password
-    console.log(req.body);
-    // 입력된 id 와 동일한 id 가 mysql 에 있는 지 확인
-    const sql1 = `SELECT COUNT(*) AS result FROM user WHERE user_id = '${user_id};'`
+router.get('/sent',(req, res)=> {
+    console.log(req.query.user_id)
+    const user_id = req.query.user_id
+    if(user_id==undefined){
+        res.send({ 'msg':  '리퀘스트좀 제대로 날려라'})
+    }
+    const sql1 = `SELECT * FROM mailbox WHERE sender = '${user_id}';`
     db.query(sql1, (err, data) => {
         if(!err) {
-        	// 결과값이 1보다 작다면(동일한 id 가 없다면)
-            if(data[0].result > 0) {
-                res.send({ 'msg': '사용 할 수 없는 ID입니다'})
-            } else { // 동일한 id 가 있으면 비밀번호 일치 확인
-                const sql2 = `INSERT INTO user (user_id, password) VALUES ('${user_id}', '${password}');`;
-                db.query(sql2, (err, data) => {
-                    if(!err) {
-                       res.send({ 'msg': '회원가입 완료'})
-                    } else {
-                        res.send(err)
-                    }
-                })
-            }
-        } else {
+        
+            res.send(data)
+        } 
+        else {
+            res.send(err)
+        }
+    })
+});
+router.get('/inbox',(req, res)=> {
+
+    console.log(req.query.user_id)
+    const user_id = req.query.user_id
+    if(user_id==undefined){
+        res.send({ 'msg':  '리퀘스트좀 제대로 날려라'})
+    }
+    const sql1 = `SELECT * FROM mailbox WHERE reciever = '${user_id}';`
+    db.query(sql1, (err, data) => {
+        if(!err) {
+        
+            res.send(data)
+        } 
+        else {
             res.send(err)
         }
     })
