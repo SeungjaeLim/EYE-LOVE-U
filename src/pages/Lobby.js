@@ -8,6 +8,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
+import Avatar from '@mui/material/Avatar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 
@@ -24,6 +25,7 @@ function Lobby({ userId, setUserId }) {
   const sex = "M";
   const [ postList, setPostList ] = useState([]);
   const [ userInfo, setUserInfo ] = useState({});
+  const [ profileImg, setProfile] = useState();
   const [ listOpen, setListOpen ] = useState(false);
   const [ profileOpen, setProfileOpen ] = useState(false);
 
@@ -45,13 +47,26 @@ function Lobby({ userId, setUserId }) {
     setUserId(window.sessionStorage.getItem('userId'));
     axios.get(`${API_BASE}/auth/info?user_id=${window.sessionStorage.getItem('userId')}`)
     .then(res => {
+      console.log(res.data)
       setUserInfo({
         id: res.data.id,
         sex: res.data.sex,
         phoneNumber: res.data.phoneNumber
       });
     })
-    .catch(err => console.log(err));  
+    .catch(err => console.log(err)); 
+
+    axios.get(`${API_BASE}/api/download?user_id=${window.sessionStorage.getItem('userId')}`,{ responseType: 'arraybuffer' }).then(result => {
+      console.log(result.data);
+      let blob = new Blob([result.data], { type: "image/jpeg" });
+      const url = window.URL.createObjectURL(blob);
+      setProfile(url);
+      console.log(url);
+    })
+    .then(res => {
+
+    })
+    
     setPostList([
       {
         id: 123,
@@ -141,10 +156,11 @@ function Lobby({ userId, setUserId }) {
 
   return (
     <div className='Lobby'>
-      <AccountCircleIcon
+      <Avatar
         sx={{ fontSize: 80 }}
         className='LobbyProfileIcon'
-        onClick={onProfileClick} />
+        onClick={onProfileClick}
+        src={profileImg}/>
       <Dialog
         open={profileOpen}
         onClose={onProfileClose}
@@ -154,14 +170,14 @@ function Lobby({ userId, setUserId }) {
           <div className='LobbyUserStatusClose'>
             <CloseIcon onClick={onProfileClose}/>
           </div>
-          <img className="LobbyUserStatusImg" src={`/logo192.png`}/>
+          <Avatar className="LobbyUserStatusImg" src={profileImg} sx={{ width: 100, height: 100 }}/>
           <div className="LobbyUserStatusId">{userInfo.id}</div>
           <div className="LobbyUserStatusOther">
             <div className="LobbyUserStatusOtherStat">
               <div>{userInfo.phoneNumber}</div>
             </div>
             <div className="LobbyUserStatusOtherStat">
-              <div>{userInfo.sex}</div>
+              <div>{userInfo.sex+'성'}</div>
             </div>
           </div>
         </div>
