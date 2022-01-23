@@ -35,7 +35,7 @@ export default function ManMatching() {
 
     setImage();
 
-    webgazer.showPredictionPoints(false) 
+    // webgazer.showPredictionPoints(false) 
     // webgazer.setGazeListener((data, clock)=>{
     // }).begin()
 
@@ -57,41 +57,42 @@ export default function ManMatching() {
         });
     })
   }
+  
 
   useEffect(()=>{
-      // webgazer.setGazeListener((data, clock)=>{
-      //   if(data == null)
-      //     return;
-      //   if(data.y > pictures1[0] && data.y < pictures1[1] && data.x >pictures1[2] && data.x < pictures1[3]){
-      //     // cnt1 = cnt1 + 1;
-      //     cnt1.current += 1;
-      //     if(cnt1.current > 30 ){
-      //       window.alert("You Choosed first")
-      //     }
-      //     // console.log(cnt1);
-      //   }
-      //   else if(data.y > pictures2[0] && data.y < pictures2[1] && data.x >pictures2[2] && data.x < pictures2[3]){
-      //     // cnt2 += 1;
-      //     cnt2.current += 1;
-      //     if( cnt2.current > 30 ){
-      //       window.alert("You Choosed second")
-      //     }
-      //   }
-      //   else if(data.y > pictures3[0] && data.y < pictures3[1] && data.x >pictures3[2] && data.x < pictures3[3]){
-      //     // cnt3 += 1;
-      //     cnt3.current += 1;
-      //     if( cnt3.current > 30 ){
-      //       window.alert("You Choosed third")
-      //     }
-      //   }
-      //   else if(data.y > pictures4[0] && data.y < pictures4[1] && data.x >pictures4[2] && data.x < pictures4[3]){
-      //     // cnt4 += 1;
-      //     cnt4.current += 1;
-      //     if( cnt4.current > 30 ){
-      //       window.alert("You Choosed fourth")
-      //     }
-      //   }
-      // }).begin()
+      webgazer.setGazeListener((data, clock)=>{
+        if(data == null)
+          return;
+        if(data.y > pictures1[0] && data.y < pictures1[1] && data.x >pictures1[2] && data.x < pictures1[3]){
+          // cnt1 = cnt1 + 1;
+          cnt1.current += 1;
+          if(cnt1.current > 10 ){
+            window.alert("You Choosed first")
+          }
+          // console.log(cnt1);
+        }
+        else if(data.y > pictures2[0] && data.y < pictures2[1] && data.x >pictures2[2] && data.x < pictures2[3]){
+          // cnt2 += 1;
+          cnt2.current += 1;
+          if( cnt2.current > 10 ){
+            window.alert("You Choosed second")
+          }
+        }
+        else if(data.y > pictures3[0] && data.y < pictures3[1] && data.x >pictures3[2] && data.x < pictures3[3]){
+          // cnt3 += 1;
+          cnt3.current += 1;
+          if( cnt3.current > 10 ){
+            window.alert("You Choosed third")
+          }
+        }
+        else if(data.y > pictures4[0] && data.y < pictures4[1] && data.x >pictures4[2] && data.x < pictures4[3]){
+          // cnt4 += 1;
+          cnt4.current += 1;
+          if( cnt4.current > 10 ){
+            window.alert("You Choosed fourth")
+          }
+        }
+      }).begin()
   })
 
   return (
