@@ -1,10 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import axios from 'axios';
+import {Button} from '@mui/material'
+
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
  
 function Register() {
 
-    const [img, setImage] = useState(null);
+    const [img, setImage] = useState(null)
+    const [selectimg, setSelected] = useState('파일 선택')
 
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
@@ -24,6 +36,7 @@ function Register() {
         setInputPn(e.target.value)
     }
     const handleInputGender = (e) => {
+        console.log(e.target.value)
         setInputGender(e.target.value)
     }
  
@@ -47,6 +60,8 @@ function Register() {
 
     //사진 등록
     const onChange = (e) => {
+        console.log(e.target.files[0])
+        setSelected(e.target.files[0].name)
         setImage(e.target.files[0]);
     }
  
@@ -54,33 +69,40 @@ function Register() {
         <div>
             <h2>Register</h2>
             <div>
-                <label htmlFor='input_id'>ID : </label>
-                <input type='text' name='input_id' value={inputId} onChange={handleInputId} />
+                <TextField type='text' name='input_id' label="ID" value={inputId} onChange={handleInputId} />
             </div>
             <div>
-                <label htmlFor='input_pw'>PW : </label>
-                <input type='password' name='input_pw' value={inputPw} onChange={handleInputPw} />
+                <TextField type="password" name='input_pw' label="Password" value={inputPw} onChange={handleInputPw} />
             </div>
             <div>
-                <label htmlFor='phonenumber'>P/N : </label>
-                <input type='phone' name='input_pn' value={inputPn} onChange={handleInputPn} />
+                <TextField type='phone' name='input_pn' label="Phone Number" value={inputPn} onChange={handleInputPn} />
             </div>
             <div>
-                <label htmlFor='Gender'>성별 : </label>
-                <select name='gender' onChange={handleInputGender}>
-                    <option value={true}> 남자 </option>
-                    <option value={false}> 여자 </option>
-                </select>
+                <ToggleButtonGroup
+                    value={inputgender}
+                    exclusive
+                    onChange={handleInputGender}>
+                        <ToggleButton value="true">
+                            남
+                        </ToggleButton>
+                        <ToggleButton value="false">
+                            여
+                        </ToggleButton>
+                </ToggleButtonGroup>
             </div>
             <div>
+                <Button variant='outlined' component='label' for='profile'>
+                    {selectimg}
+                </Button>
                 <input 
-                    name="file"
+                    id="profile"
                     type="file" 
                     accept="image/jpg,image/png,image/jpeg,image/gif"
+                    hidden
                     onChange={onChange}/>
             </div>
             <div>
-                <button type='button' onClick={onClickRegister}>Register</button>
+                <Button variant='outlined' type='button' onClick={onClickRegister}>Register</Button>
             </div>
         </div>
     )
