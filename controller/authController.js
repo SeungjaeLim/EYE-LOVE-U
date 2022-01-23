@@ -109,4 +109,24 @@ router.get('/info',(req, res)=> {
     })
 });
 
+router.get('/random',(req, res)=> {
+    const gender = req.query.gender?1:0
+    console.log(gender)
+    
+    // const sql1 = `SELECT * FROM user WHERE user_id = '${user_id}';`
+    // db.query(sql1, (err, data) => {
+        // if(!err) {
+            res.json({
+                'id_1' : `Hong`,
+                'id_2' : `Hong1`,
+                'id_3' : `junyoung`,
+                'id_4' : `test12`,
+            })
+        // } 
+        // else {
+            // res.send(err)
+        // }
+    // })
+});
+
 module.exports = router;

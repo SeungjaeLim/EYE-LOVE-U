@@ -41,13 +41,14 @@ router.get('/download',(req, res)=> {
         res.send({ 'msg':  '리퀘스트좀 제대로 날려라'})
     }
     const sql1 = `SELECT profileImg FROM user WHERE user_id = '${user_id}';`
+    // console.log(data)
     db.query(sql1, (err, data) => {
         if(!err) {
             console.log(data[0].profileImg)
             const dir = 'eyeloveyou_back/uploads',
             file = data[0].profileImg;
       
-        res.sendfile(dir + '/' + file, {'root': '../'});
+            res.sendfile(dir + '/' + file, {'root': '../'});
         } 
         else {
             res.send(err)
