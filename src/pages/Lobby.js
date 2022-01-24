@@ -21,6 +21,8 @@ import Box from '@mui/material/Box';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 
 import "../style/Lobby.css";
 import { Badge } from '@mui/material';
@@ -215,8 +217,9 @@ function Lobby({ userId, setUserId }) {
 
   return (
     <div className='Lobby'>
+      <div className='Background'>
       <Avatar
-        sx={{ width: 100, height: 100 }}
+        sx={{ width: 350, height: 350}}
         className='LobbyProfileIcon'
         onClick={onProfileClick}
         src={profileImg}/>
@@ -241,13 +244,17 @@ function Lobby({ userId, setUserId }) {
           </div>
         </div>
       </Dialog>
-      <StyledBadge 
-          badgeContent={mailCount}
-          color="primary">
-        <MailIcon
-          sx={{ width: 100, height: 100 }}
-          onClick={() => showList()} />
-      </StyledBadge>
+      <div className='PostBox'>
+        <StyledBadge 
+            badgeContent={mailCount}
+            color="secondary">
+          <MailIcon
+            style={{fill: "white"}}
+            sx={{ width: 100, height: 100 }}
+            onClick={() => showList()} />
+        </StyledBadge>
+      </div>
+
       <Dialog
         open={listOpen}
         TransitionComponent={Transition}
@@ -271,23 +278,27 @@ function Lobby({ userId, setUserId }) {
           inboxContents()
         }</List> */}
       </Dialog>
-      <div onClick={(e) => {
-        e.preventDefault();
-        onClick("calibration"); 
-      }}>
-        Calibration
-      </div>
-        
-      <div onClick={(e) => {
-        e.preventDefault();
-        if(sex === "M") {
-          onClick("manmatching");
-        }
-        else {
-          onClick("womanmatching")
-        }
-      }}>
-        Matching
+      <div className='ButtonForm'>
+        <div className='CalibrationForm'>
+          <LocationSearchingIcon
+                style={{fill: "grey"}}
+                sx={{ width: 100, height: 100 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick("calibration"); 
+                }} />
+          <div className='CalText'>EYE</div>
+        </div>
+        <div className='MatchingForm'>
+          <VolunteerActivismIcon 
+                style={{fill: "grey"}}
+                sx={{ width: 100, height: 100 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onClick("manmatching"); 
+                }} />
+          <div className='MatText'>Find Love</div>
+        </div>
       </div>
       <Dialog open={alertOpen}>
         <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
@@ -298,6 +309,7 @@ function Lobby({ userId, setUserId }) {
           }}>확인</Button>
         </DialogActions>
       </Dialog>
+      </div>
     </div>
   ); 
 }
