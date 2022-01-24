@@ -43,58 +43,59 @@ export default function Calibration() {
   }
   
   return (
-    <div className='calrow'>
-      <div className='calcolumn'>
-        <div className='cell2'>
-          {/* <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt1'>
-          </CheckBoxOutlineBlankIcon> */}
+    <div className='Lobby'> 
+      <div className='calrow'>
+        <div className='calcolumn'>
+          <div className='cell2'>
+            {/* <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt1'>
+            </CheckBoxOutlineBlankIcon> */}
+          </div>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt2'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt3'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
         </div>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt2'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt3'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-      </div>
-      <div className='calcolumn'>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt4'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-        <div className='cell1'>
-          <div className = 'startcali'>
-            <span> 이 단계는 사용자의 환경에 모델을 최적화 시키는 과정입니다.<br/>무작위로 나타나는 버튼과 빨간 점의 거리가 가까워지면 버튼을 눌러주세요.</span>
-            <div className = 'start'>
-              <button onClick = {startCalibration} > Start Calibration </button>
+        <div className='calcolumn'>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt4'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
+          <div className='cell1'>
+            <div className = 'startcali'>
+              <span> 이 단계는 사용자의 환경에 모델을 최적화 시키는 과정입니다.<br/>무작위로 나타나는 버튼과 빨간 점의 거리가 가까워지면 버튼을 눌러주세요.</span>
+              <div className = 'start'>
+                <button onClick = {startCalibration} > Start Calibration </button>
+              </div>
+            </div>
+            <div className='goToMatching'>
+              <button onClick={goToMatching}> Go to Matching </button>
             </div>
           </div>
-          <div className='goToMatching'>
-            <button onClick={goToMatching}> Go to Matching </button>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt5'>
+            </CheckBoxOutlineBlankIcon>
           </div>
         </div>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt5'>
-          </CheckBoxOutlineBlankIcon>
+        <div className='calcolumn'>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt6'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt7'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
+          <div className='cell'>
+            <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt8'>
+            </CheckBoxOutlineBlankIcon>
+          </div>
         </div>
-      </div>
-      <div className='calcolumn'>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt6'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt7'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt8'>
-          </CheckBoxOutlineBlankIcon>
-        </div>
-      </div>
 
+      </div>
     </div>
-    
   );
 }
