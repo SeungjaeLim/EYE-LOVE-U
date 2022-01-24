@@ -113,6 +113,8 @@ function Lobby({ userId, setUserId }) {
         sex: res.data.sex,
         phoneNumber: res.data.phoneNumber
       });
+      window.sessionStorage.setItem('sex', res.data.sex)
+      window.sessionStorage.setItem('phoneNumber', res.data.phoneNumber);
     })
     .catch(err => console.log(err)); 
 
