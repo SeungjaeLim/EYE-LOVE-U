@@ -7,6 +7,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 
+import '../style/Auth.css';
+
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 function Login({ setUserId }) {
@@ -49,27 +51,33 @@ function Login({ setUserId }) {
     }
  
     return(
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={onLogin}>
-                <div>
-                    <TextField label="ID" style={{ marginBottom: "0.6rem", width: "100%", style: {fontFamily:'paybooc'} }} autoComplete="off" size="small" name="id"/>
-                    <TextField label="PASSWORD" style={{ width: "100%", style: {fontFamily:'paybooc'} }} type="password" size="small" autoComplete="off" name="pwd"/>
-                </div>
-                <Button variant='outlined' type='submit'>Login</Button>
-                <Button variant='outlined' type='button' onClick={(e) => {
-                    e.preventDefault();
-                    onClickRegister("register");}}>Register</Button>
-            </form>
-            
-            <Dialog open={alertOpen}>
-                <DialogTitle style={{ display: "flex", justifyContent: "center"}} >로그인에 실패했습니다.</DialogTitle>
-                <DialogActions>
-                    <Button onClick={() => {
-                        setAlertOpen(false);
-                    }}>확인</Button>
-                </DialogActions>
-            </Dialog>
+        <div className='Auth'>
+            <div className='Background'>
+                <div className='Title'> EYE Love U</div>
+                <form className='LoginForm' onSubmit={onLogin}>
+                    <div className='LoginFormInput'>
+                        <TextField label="ID" style={{ marginBottom: "0.6rem", width: "100%", style: {fontFamily:'paybooc'} }} autoComplete="off" size="small" name="id"/>
+                        <TextField label="PASSWORD" style={{ width: "100%", style: {fontFamily:'paybooc'} }} type="password" size="small" autoComplete="off" name="pwd"/>
+                    </div>
+                    <div className='LoginButtonForm'>
+                        <Button variant='outlined' type='submit'>Login</Button>
+                    </div>
+                    <div className='LoginButtonForm'>
+                        <Button variant='outlined' type='button' onClick={(e) => {
+                            e.preventDefault();
+                            onClickRegister("register");}}>Register</Button>
+                    </div>
+                </form>
+                
+                <Dialog open={alertOpen}>
+                    <DialogTitle style={{ display: "flex", justifyContent: "center"}} >로그인에 실패했습니다.</DialogTitle>
+                    <DialogActions>
+                        <Button onClick={() => {
+                            setAlertOpen(false);
+                        }}>확인</Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </div>
     )
 }
