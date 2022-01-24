@@ -18,7 +18,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
 import "../style/Lobby.css";
 import { Badge } from '@mui/material';
@@ -74,12 +76,15 @@ function Lobby({ userId, setUserId }) {
   const navigate = useNavigate();
   const sex = "M";
   const [ postList, setPostList ] = useState([]);
+  const [ postSendList, setPostSendList ] = useState([]);
   const [ mailCount,setMailCount] = useState(0);
+  const [ sentMailCount,setSentMailCount] = useState(0);
   const [ value,       setValue ] = useState(0);
   const [ userInfo, setUserInfo ] = useState({});
   const [ profileImg, setProfile] = useState();
   const [ listOpen, setListOpen ] = useState(false);
   const [ profileOpen, setProfileOpen ] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
 
   const onClick = (target) => {
     navigate(`/${target}`);
@@ -103,7 +108,6 @@ function Lobby({ userId, setUserId }) {
     setUserId(window.sessionStorage.getItem('userId'));
     axios.get(`${API_BASE}/auth/info?user_id=${window.sessionStorage.getItem('userId')}`)
     .then(res => {
-      console.log(res.data)
       setUserInfo({
         id: res.data.id,
         sex: res.data.sex,
@@ -113,11 +117,9 @@ function Lobby({ userId, setUserId }) {
     .catch(err => console.log(err)); 
 
     axios.get(`${API_BASE}/api/download?user_id=${window.sessionStorage.getItem('userId')}`,{ responseType: 'arraybuffer' }).then(result => {
-      console.log(result.data);
       let blob = new Blob([result.data], { type: "image/jpeg" });
       const url = window.URL.createObjectURL(blob);
       setProfile(url);
-      console.log(url);
     })
     
     setInbox();
@@ -126,8 +128,11 @@ function Lobby({ userId, setUserId }) {
 
   const setInbox = ()=> {
     let count=0;
-    setMailCount(0)
-    setPostList([])
+    let sentCount = 0;
+    setMailCount(0);
+    setPostList([]);
+    setSentMailCount(0)
+    setPostSendList([])
     axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
     .then(res => {
       setPostList(res.data)
@@ -135,21 +140,37 @@ function Lobby({ userId, setUserId }) {
         if(post.isread==0)count++;
       })
     }).finally(()=>{
-      console.log(count);
       setMailCount(count);
-      console.log(mailCount)
+    });
+    axios.get(`${API_BASE}/post/sent?user_id=${window.sessionStorage.getItem('userId')}`)
+    .then(res => {
+      console.log(res.data)
+      setPostSendList(res.data)
+      res.data.map(post=>{
+        if(post.isread==0)sentCount++;
+      })
+    }).finally(()=>{
+      setSentMailCount(sentCount);
     });
   }
 
-  const onPostClick = (id) => {
-    if(window.confirm(`${id}에게 답장하시겠습니까?`)) {
-      //api request
+  const onPostClick = (senderId) => {
+    if(window.confirm(`${senderId}에게 답장하시겠습니까?`)) {
+      axios.post(`${API_BASE}/post/send`, {
+        'sender': userId,
+        'recevier': senderId,
+        'content': userInfo.phoneNumber
+      })
+      .then(res => {
+        setAlertOpen(true);
+      })
+      .catch(err =>{
+        console.log(err);
+      });
     }
   }
 
   const inboxContents = () => {
-    
-    console.log(postList)
     if(mailCount != 0) {
       return postList.map(post =>{
         return (
@@ -158,27 +179,32 @@ function Lobby({ userId, setUserId }) {
               onClick={onPostClick}
               id = {post.mail_id}
               senderId = {post.sender}
-              senderPhone = {post.senderPhone}/>
+              recevierId = {post.reciever}
+              content = {post.content}
+              />
           </ListItem>);
       });
     }
     return <div>누구에게도 선택받지 못했습니다</div>
   }
   const sentContents = () => {
-    
-    console.log(postList)
-    return postList.map(post =>{
-      console.log(post)
-      return (
-        <ListItem key={post.id}>
-          <PostListItem
-            onClick={onPostClick}
-            id = {post.mail_id}
-            senderId = {post.sender}
-            senderPhone = {post.senderPhone}/>
-        </ListItem>);
-    });
-    return <div>누구에게도 선택받지 못했습니다</div>
+    if(sentMailCount != 0) {
+      return postSendList.map(post =>{
+        console.log(post)
+        return (
+          <ListItem key={post.id}>
+            <PostListItem
+              id = {post.mail_id}
+              senderId = {post.reciever}
+              recevierId = {post.reciever}
+              content = {post.content}
+              />
+          </ListItem>);
+      });
+    }
+    else {
+      return <div>아직 보낸 메일이 없습니다.</div>
+    }
   }
 
   const showList = () => {
@@ -236,7 +262,7 @@ function Lobby({ userId, setUserId }) {
           {inboxContents()}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          {sentContents()}
         </TabPanel>
         
         {/* <List>{
@@ -261,7 +287,15 @@ function Lobby({ userId, setUserId }) {
       }}>
         Matching
       </div>
-      
+      <Dialog open={alertOpen}>
+        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
+        <DialogActions>
+          <Button onClick={() => {
+            setAlertOpen(false);
+            navigate('/lobby');
+          }}>확인</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   ); 
 }
