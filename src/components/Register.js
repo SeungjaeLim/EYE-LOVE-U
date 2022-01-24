@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Register.css'
  
 function Register() {
 
@@ -73,12 +74,26 @@ function Register() {
                 </select>
             </div>
             <div>
+                <label className="input-file-button" htmlFor="input-file">
+                업로드
+                </label>
+                <input type="file" 
+                    id="input-file" 
+                    accept="image/jpg,image/png,image/jpeg,image/gif"
+                    onChange={onChange}
+                    style={{display:"none"}
+                    }/>
+            </div>
+            
+
+            {/* <div>
                 <input 
                     name="file"
                     type="file" 
                     accept="image/jpg,image/png,image/jpeg,image/gif"
                     onChange={onChange}/>
-            </div>
+            </div> */}
+
             <div>
                 <button type='button' onClick={onClickRegister}>Register</button>
             </div>
