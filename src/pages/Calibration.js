@@ -17,6 +17,7 @@ export default function Calibration() {
     console.log(elements);
   }, [])
 
+
   function goToMatching(e){
     webgazer.pause();
     navigate(`/manmatching`);
@@ -44,9 +45,9 @@ export default function Calibration() {
   return (
     <div className='calrow'>
       <div className='calcolumn'>
-        <div className='cell'>
-          <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt1'>
-          </CheckBoxOutlineBlankIcon>
+        <div className='cell2'>
+          {/* <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt1'>
+          </CheckBoxOutlineBlankIcon> */}
         </div>
         <div className='cell'>
           <CheckBoxOutlineBlankIcon onClick={Calibration} className='bnt2'>

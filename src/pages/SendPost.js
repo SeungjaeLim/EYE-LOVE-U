@@ -8,12 +8,13 @@ import Button from '@mui/material/Button';
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 function SendPost({ userId, selectedId }) {
+  console.log(window.sessionStorage.getItem('selectedId'));
   const [alertOpen, setAlertOpen] = useState(false);
 
   const navigate = useNavigate();
   const senderInfo = {
-    id : "abc",
-    phoneNumber : "01012345678",
+    id : window.sessionStorage.getItem('userId'),
+    phoneNumber : window.sessionStorage.getItem('phoneNumber'),
     photo : "rrr.jpg"
   };
   const addresseeInfo = {
@@ -23,8 +24,8 @@ function SendPost({ userId, selectedId }) {
   const onSendMail = (e) => {
     e.preventDefault();
     axios.post(`${API_BASE}/post/send`, {
-      'sender': userId,
-      'recevier': selectedId,
+      'sender': window.sessionStorage.getItem('userId'),
+      'reciever': window.sessionStorage.getItem('selectedId'),
       'content': e.target.message.value
     })
     .then(res => {

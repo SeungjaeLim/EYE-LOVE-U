@@ -1,6 +1,7 @@
 import {useState, useEffect, useRef} from 'react'
 import axios from 'axios';
 import './Calibration.css'
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 export default function ManMatching( {setSelectedId} ) {
   const webgazer = window.webgazer
@@ -42,13 +43,14 @@ export default function ManMatching( {setSelectedId} ) {
   }, [])
 
   const setImage = async () =>{
-    axios.get('http://143.248.192.66:8080/auth/random').then(result => {
+    console.log(window.sessionStorage.getItem('sex'));
+    axios.get(`${API_BASE}/auth/random?sex=${window.sessionStorage.getItem('sex')==='남'? "male" : "female" }`).then(result => {
       console.log(result.data);
         const resArr = [ result.data.id_1, result.data.id_2, result.data.id_3, result.data.id_4 ];
         setIdList(resArr)
         console.log(resArr);
         Promise.all(
-          resArr.map((e) => axios.get((`http://143.248.192.66:8080/api/download?user_id=${e}`), { responseType: 'arraybuffer'})
+          resArr.map((e) => axios.get((`${API_BASE}/api/download?user_id=${e}`), { responseType: 'arraybuffer'})
         )).then(res => {
           setImages(res.map((e) => {
               let blob = new Blob([e.data], { type: "image/*" });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Register.css'
 const API_BASE = process.env.REACT_APP_API_BASE;
  
 function Login() {
