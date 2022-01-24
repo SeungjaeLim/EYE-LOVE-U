@@ -56,13 +56,12 @@ function Login({ setUserId }) {
                     <TextField label="ID" style={{ marginBottom: "0.6rem", width: "100%", style: {fontFamily:'paybooc'} }} autoComplete="off" size="small" name="id"/>
                     <TextField label="PASSWORD" style={{ width: "100%", style: {fontFamily:'paybooc'} }} type="password" size="small" autoComplete="off" name="pwd"/>
                 </div>
-                <input className="SubmitButton" type="submit" value="LOGIN"/>
+                <Button variant='outlined' type='submit'>Login</Button>
+                <Button variant='outlined' type='button' onClick={(e) => {
+                    e.preventDefault();
+                    onClickRegister("register");}}>Register</Button>
             </form>
-            <div className="RegisterButton" onClick={(e) => {
-                e.preventDefault();
-                onClickRegister("register"); }}>
-                계정이 없으신가요?
-            </div>
+            
             <Dialog open={alertOpen}>
                 <DialogTitle style={{ display: "flex", justifyContent: "center"}} >로그인에 실패했습니다.</DialogTitle>
                 <DialogActions>
