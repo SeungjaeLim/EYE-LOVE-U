@@ -13,7 +13,7 @@ function App() {
     {path: '/lobby', element: <Lobby userId={userId} setUserId={setUserId} />},
     {path: '/manmatching', element: <ManMatching/>},
     {path: '/wonmanmatching', element: <WomanMatching/>},
-    {path: '/sendpost', element: <SendPost/>}
+    {path: '/sendpost', element: <SendPost userId={userId} />}
   ])
   
   

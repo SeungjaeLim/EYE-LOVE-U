@@ -150,16 +150,18 @@ function Lobby({ userId, setUserId }) {
   const inboxContents = () => {
     
     console.log(postList)
-    return postList.map(post =>{
-      return (
-        <ListItem key={post.id}>
-          <PostListItem
-            onClick={onPostClick}
-            id = {post.mail_id}
-            senderId = {post.sender}
-            senderPhone = {post.senderPhone}/>
-        </ListItem>);
-    });
+    if(mailCount != 0) {
+      return postList.map(post =>{
+        return (
+          <ListItem key={post.id}>
+            <PostListItem
+              onClick={onPostClick}
+              id = {post.mail_id}
+              senderId = {post.sender}
+              senderPhone = {post.senderPhone}/>
+          </ListItem>);
+      });
+    }
     return <div>누구에게도 선택받지 못했습니다</div>
   }
   const sentContents = () => {
