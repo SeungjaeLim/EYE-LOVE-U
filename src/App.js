@@ -14,7 +14,7 @@ function App() {
     {path: '/lobby', element: <Lobby userId={userId} setUserId={setUserId} />},
     {path: '/manmatching', element: <ManMatching setSelectedId={setSelectedId}/>},
     {path: '/wonmanmatching', element: <WomanMatching/>},
-    {path: '/sendpost', element: <SendPost selectedId={selectedId} />}
+    {path: '/sendpost', element: <SendPost selectedId={selectedId} userId={userId} />}
   ])
   
   
