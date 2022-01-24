@@ -277,6 +277,7 @@ function Lobby({ userId, setUserId }) {
         }</List> */}
       </Dialog>
       <div className='ButtonForm'>
+        <div className='CalibrationForm'>
           <LocationSearchingIcon
                 style={{fill: "grey"}}
                 sx={{ width: 100, height: 100 }}
@@ -284,6 +285,9 @@ function Lobby({ userId, setUserId }) {
                   e.preventDefault();
                   onClick("calibration"); 
                 }} />
+          <div className='CalText'>EYE</div>
+        </div>
+        <div className='MatchingForm'>
           <VolunteerActivismIcon 
                 style={{fill: "grey"}}
                 sx={{ width: 100, height: 100 }}
@@ -291,6 +295,8 @@ function Lobby({ userId, setUserId }) {
                   e.preventDefault();
                   onClick("manmatching"); 
                 }} />
+          <div className='MatText'>Find Love</div>
+        </div>
       </div>
       <Dialog open={alertOpen}>
         <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
