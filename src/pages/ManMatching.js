@@ -104,12 +104,10 @@ export default function ManMatching( {setSelectedId} ) {
   })
 
   return (
-    <div>
-      <div className='top1'> </div>
-      Calibration
+    <div className='Lobby'>
       <div className ='pictures'>
         <div className = 'picturelow'>
-          <div >
+          <div>
             <div className ='picture1'>
               <img src={images[0]} className='image' alt="first"/>
             </div>
