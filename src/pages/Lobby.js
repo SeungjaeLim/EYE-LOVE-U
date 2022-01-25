@@ -240,21 +240,21 @@ function Lobby({ userId, setUserId }) {
   return (
     <div className='Lobby'>
       <div className='Background'>
-      <Avatar
+      <Avatar style={{ fontFamily: "pretty"}}
         sx={{ width: 350, height: 350}}
         className='LobbyProfileIcon'
         onClick={onProfileClick}
         src={profileImg}/>
-      <Dialog
+      <Dialog style={{ fontFamily: "pretty"}}
         open={profileOpen}
         onClose={onProfileClose}
         TransitionComponent={Transition}
         aria-describedby="alert-dialog-slide-description" >
         <div className='LobbyUserStatus'>
           <div className='LobbyUserStatusClose'>
-            <CloseIcon onClick={onProfileClose}/>
+            <CloseIcon style={{ fontFamily: "pretty"}} onClick={onProfileClose}/>
           </div>
-          <Avatar className="LobbyUserStatusImg" src={profileImg} sx={{ width: 100, height: 100 }}/>
+          <Avatar style={{ fontFamily: "pretty"}} className="LobbyUserStatusImg" src={profileImg} sx={{ width: 100, height: 100 }}/>
           <div className="LobbyUserStatusId">{userInfo.id}</div>
           <div className="LobbyUserStatusOther">
             <div className="LobbyUserStatusOtherStat">
@@ -267,32 +267,32 @@ function Lobby({ userId, setUserId }) {
         </div>
       </Dialog>
       <div className='PostBox'>
-        <StyledBadge 
+        <StyledBadge style={{ fontFamily: "pretty"}}
             badgeContent={mailCount}
             color="secondary">
-          <MailIcon
+          <MailIcon style={{ fontFamily: "pretty"}}
             style={{fill: "white"}}
             sx={{ width: 100, height: 100 }}
             onClick={() => showList()} />
         </StyledBadge>
       </div>
 
-      <Dialog
+      <Dialog style={{ fontFamily: "pretty"}}
         open={listOpen}
         TransitionComponent={Transition}
         onClose={() => setListOpen(false)}>
         <CloseIcon onClick={() => setListOpen(false)}/>
         
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="받은 편지함" {...a11yProps(0)} />
-            <Tab label="보낸 편지함" {...a11yProps(1)} />
+        <Box style={{ fontFamily: "pretty"}} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs style={{ fontFamily: "pretty"}} value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab style={{ fontFamily: "pretty"}} label="받은 편지함" {...a11yProps(0)} />
+            <Tab style={{ fontFamily: "pretty"}} label="보낸 편지함" {...a11yProps(1)} />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
+        <TabPanel style={{ fontFamily: "pretty"}} value={value} index={0}>
           {inboxContents()}
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel style={{ fontFamily: "pretty"}} value={value} index={1}>
           {sentContents()}
         </TabPanel>
         

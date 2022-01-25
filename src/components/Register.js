@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {Button} from '@mui/material'
 
@@ -14,11 +15,13 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
  
 import '../style/Register.css';
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function Register() {
 
     const [img, setImage] = useState(null)
     const [selectimg, setSelected] = useState('파일 선택')
+    const navigate = useNavigate();
 
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
@@ -47,15 +50,17 @@ function Register() {
         const formData = new FormData();
         formData.append('file', img);
         // 서버의 upload API 호출
-        axios.post("http://localhost:8080/api/upload", formData).then(res =>{
-            axios.post('http://localhost:8080/auth/register', {
+        axios.post(`${API_BASE}/api/upload`, formData).then(res =>{
+            axios.post(`${API_BASE}/auth/register`, {
                 'user_id': inputId,
                 'password': inputPw,
                 'profileImg':res.data.url,
                 'ismale':inputgender,
                 'phone':inputPn
             })
-            .then(res => console.log(res))
+            .then(res => {
+                navigate(`/`);
+            })
             .catch()
         })
     }
@@ -72,29 +77,29 @@ function Register() {
             <div className='RegBackground'>
                 <div className='RegFrorm'>
                 <div className='RegId'>
-                    <TextField type='text' name='input_id' label="ID" value={inputId} onChange={handleInputId} />
+                    <TextField inputProps={{style: {fontFamily:'pretty'}}} InputLabelProps={{style: {fontFamily:'pretty'}}} type='text' name='input_id' label="ID" color="secondary" value={inputId} onChange={handleInputId} />
                 </div>
                 <div className='RegPwd'>
-                    <TextField type="password" name='input_pw' label="Password" value={inputPw} onChange={handleInputPw} />
+                    <TextField InputLabelProps={{style: {fontFamily:'pretty'}}} type="password" name='input_pw' color="secondary" label="Password" value={inputPw} onChange={handleInputPw} />
                 </div>
                 <div className='RegPhone'>
-                    <TextField type='phone' name='input_pn' label="Phone Number" value={inputPn} onChange={handleInputPn} />
+                    <TextField inputProps={{style: {fontFamily:'pretty'}}} InputLabelProps={{style: {fontFamily:'pretty'}}} type='phone' name='input_pn' color="secondary" label="Phone Number" value={inputPn} onChange={handleInputPn} />
                 </div>
                 <div className='RegSex'>
                     <ToggleButtonGroup
                         value={inputgender}
                         exclusive
                         onChange={handleInputGender}>
-                            <ToggleButton style={{ width: "7rem", height: "3rem"}} value="true">
+                            <ToggleButton style={{ width: "7rem", height: "3rem", fontFamily:'pretty'}} value="true">
                                 남
                             </ToggleButton>
-                            <ToggleButton style={{ width: "7rem", height: "3rem"}}value="false">
+                            <ToggleButton style={{ width: "7rem", height: "3rem", fontFamily:'pretty'}}value="false">
                                 여
                             </ToggleButton>
                     </ToggleButtonGroup>
                 </div>
                 <div className='RegPic'>
-                    <Button variant='outlined' component='label' for='profile'>
+                    <Button style={{ fontFamily: "pretty"}} color="secondary" variant='outlined' component='label' for='profile'>
                         {selectimg}
                     </Button>
                     <input 
@@ -105,7 +110,7 @@ function Register() {
                         onChange={onChange}/>
                 </div>
                 <div className='RegButton'>
-                    <Button variant='outlined' type='button' onClick={onClickRegister}>Register</Button>
+                    <Button style={{ fontFamily: "pretty"}} color="secondary" variant='outlined' type='button' onClick={onClickRegister}>Register</Button>
                 </div>
                 </div>
             </div>

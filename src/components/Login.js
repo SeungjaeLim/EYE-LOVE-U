@@ -53,26 +53,27 @@ function Login({ setUserId }) {
     return(
         <div className='Auth'>
             <div className='Background'>
-                <div className='Title'> EYE Love U</div>
+                <div className='Title'>EYE</div>
+                <div className='Title'>Love U</div>
                 <form className='LoginForm' onSubmit={onLogin}>
                     <div className='LoginFormInput'>
-                        <TextField label="ID" style={{ marginBottom: "0.6rem", width: "100%", style: {fontFamily:'paybooc'} }} autoComplete="off" size="small" name="id"/>
-                        <TextField label="PASSWORD" style={{ width: "100%", style: {fontFamily:'paybooc'} }} type="password" size="small" autoComplete="off" name="pwd"/>
+                        <TextField inputProps={{style: {fontFamily:'pretty'}}} InputLabelProps={{style: {fontFamily:'pretty'}}} label="ID" color="secondary" style={{ marginBottom: "0.6rem", width: "100%", style: {fontFamily:'pretty'} }} autoComplete="off" size="small" name="id"/>
+                        <TextField InputLabelProps={{style: {fontFamily:'pretty'}}} label="PASSWORD" color="secondary" style={{ width: "100%", style: {fontFamily:'pretty'} }} type="password" size="small" autoComplete="off" name="pwd"/>
                     </div>
                     <div className='LoginButtonForm'>
-                        <Button variant='outlined' type='submit'>Login</Button>
+                        <Button style={{ fontFamily: "pretty"}} color="secondary" variant='outlined' type='submit'  >Login</Button>
                     </div>
                     <div className='LoginButtonForm'>
-                        <Button variant='outlined' type='button' onClick={(e) => {
+                        <Button style={{ fontFamily: "pretty"}} color="secondary" variant='outlined' type='button' onClick={(e) => {
                             e.preventDefault();
                             onClickRegister("register");}}>Register</Button>
                     </div>
                 </form>
                 
                 <Dialog open={alertOpen}>
-                    <DialogTitle style={{ display: "flex", justifyContent: "center"}} >로그인에 실패했습니다.</DialogTitle>
+                    <DialogTitle style={{ display: "flex", justifyContent: "center", fontFamily: "pretty"}} >로그인에 실패했습니다.</DialogTitle>
                     <DialogActions>
-                        <Button onClick={() => {
+                        <Button style={{ fontFamily: "pretty"}} onClick={() => {
                             setAlertOpen(false);
                         }}>확인</Button>
                     </DialogActions>

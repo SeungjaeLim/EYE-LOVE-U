@@ -21,7 +21,7 @@
 .Title {
   font-size: 6rem;
   margin-bottom: 1rem;
-  font-weight: bold;
+  font-weight: normal;
 }
 .LoginForm {
   display: flex;
