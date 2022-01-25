@@ -13,6 +13,8 @@ import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
  
+import '../style/Register.css';
+
 function Register() {
 
     const [img, setImage] = useState(null)
@@ -66,43 +68,46 @@ function Register() {
     }
  
     return(
-        <div>
-            <h2>Register</h2>
-            <div>
-                <TextField type='text' name='input_id' label="ID" value={inputId} onChange={handleInputId} />
-            </div>
-            <div>
-                <TextField type="password" name='input_pw' label="Password" value={inputPw} onChange={handleInputPw} />
-            </div>
-            <div>
-                <TextField type='phone' name='input_pn' label="Phone Number" value={inputPn} onChange={handleInputPn} />
-            </div>
-            <div>
-                <ToggleButtonGroup
-                    value={inputgender}
-                    exclusive
-                    onChange={handleInputGender}>
-                        <ToggleButton value="true">
-                            남
-                        </ToggleButton>
-                        <ToggleButton value="false">
-                            여
-                        </ToggleButton>
-                </ToggleButtonGroup>
-            </div>
-            <div>
-                <Button variant='outlined' component='label' for='profile'>
-                    {selectimg}
-                </Button>
-                <input 
-                    id="profile"
-                    type="file" 
-                    accept="image/jpg,image/png,image/jpeg,image/gif"
-                    hidden
-                    onChange={onChange}/>
-            </div>
-            <div>
-                <Button variant='outlined' type='button' onClick={onClickRegister}>Register</Button>
+        <div className='Reg'>
+            <div className='RegBackground'>
+                <div className='RegFrorm'>
+                <div className='RegId'>
+                    <TextField type='text' name='input_id' label="ID" value={inputId} onChange={handleInputId} />
+                </div>
+                <div className='RegPwd'>
+                    <TextField type="password" name='input_pw' label="Password" value={inputPw} onChange={handleInputPw} />
+                </div>
+                <div className='RegPhone'>
+                    <TextField type='phone' name='input_pn' label="Phone Number" value={inputPn} onChange={handleInputPn} />
+                </div>
+                <div className='RegSex'>
+                    <ToggleButtonGroup
+                        value={inputgender}
+                        exclusive
+                        onChange={handleInputGender}>
+                            <ToggleButton style={{ width: "7rem", height: "3rem"}} value="true">
+                                남
+                            </ToggleButton>
+                            <ToggleButton style={{ width: "7rem", height: "3rem"}}value="false">
+                                여
+                            </ToggleButton>
+                    </ToggleButtonGroup>
+                </div>
+                <div className='RegPic'>
+                    <Button variant='outlined' component='label' for='profile'>
+                        {selectimg}
+                    </Button>
+                    <input 
+                        id="profile"
+                        type="file" 
+                        accept="image/jpg,image/png,image/jpeg,image/gif"
+                        hidden
+                        onChange={onChange}/>
+                </div>
+                <div className='RegButton'>
+                    <Button variant='outlined' type='button' onClick={onClickRegister}>Register</Button>
+                </div>
+                </div>
             </div>
         </div>
     )

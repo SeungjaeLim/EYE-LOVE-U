@@ -1,0 +1,56 @@
+.Reg {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-image: url("../../public/PinkBackGround.png");
+  background-repeat : no-repeat;
+  background-size : cover;
+}
+.RegBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  padding: 3rem;
+  border-radius: 4rem;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.RegForm {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+}
+.RegId {
+  display: flex;
+  flex-direction: column;
+}
+.RegPwd {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.RegPhone {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.RegSex {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.RegPic {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.RegButton {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
