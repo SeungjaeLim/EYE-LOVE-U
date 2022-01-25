@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import PostListItem from "../components/PostListItem";
+import SentListItem from "../components/SentListItem";
 import CloseIcon from '@mui/icons-material/Close';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -135,35 +136,32 @@ function Lobby({ userId, setUserId }) {
   const setInbox = async () => {
     let count=0;
     let sentCount = 0;
-    let templist = [];
+    let templist1 = [];
+    let templist2 = [];
     setMailCount(0);
     setPostList([]);
     setSentMailCount(0)
     setPostSendList([])
-    const res = await axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
-    res.data.forEach(async (post) => {
+    const res1 = await axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
+    res1.data.forEach(async (post) => {
       if(post.isread==0)count++;
       const url = await getProfile(post.sender)
       post.url=url;
-      templist=[...templist, post]
-      setPostList(templist)
-      console.log(url);
-      console.log(templist);
-      console.log(postList);
-      
-    })
-    console.log(templist)
-    setMailCount(count);
-
-    axios.get(`${API_BASE}/post/sent?user_id=${window.sessionStorage.getItem('userId')}`)
-    .then(res => {
-      setPostSendList(res.data)
-      res.data.map(post=>{
-        if(post.isread==0)sentCount++;
-      })
-    }).finally(()=>{
-      setSentMailCount(sentCount);
+      templist1=[...templist1, post]
+      setPostList(templist1)
     });
+    setMailCount(count);
+    
+    const res2 = await axios.get(`${API_BASE}/post/sent?user_id=${window.sessionStorage.getItem('userId')}`)
+    res2.data.forEach(async (post) => {
+      const url = await getProfile(post.reciever);
+      post.url=url;
+      templist2=[...templist2, post]
+      setPostSendList(templist2)
+      console.log(templist2);
+    });
+    console.log(postSendList);
+    setMailCount(count);
   }
 
   const onPostClick = (id, senderId) => {
@@ -190,9 +188,8 @@ function Lobby({ userId, setUserId }) {
   }
 
   const inboxContents = () => {
-    if(mailCount != 0) {
+    if(postList.length != 0) {
       return postList.map(post =>{
-        // console.log(post);
         return (
           <Box sx={{ minWidth: 275}}>
             <Card variant="outlined">
@@ -212,16 +209,18 @@ function Lobby({ userId, setUserId }) {
     return <div>누구에게도 선택받지 못했습니다</div>
   }
   const sentContents = () => {
-    if(sentMailCount != 0) {
+    if(postSendList.length != 0) {
       return postSendList.map(post =>{
+        console.log(post)
         return (
           <Box sx={{ minWidth: 275}}>
             <Card variant="outlined">
-              <PostListItem
+              <SentListItem
                 id = {post.mail_id}
-                senderId = {post.sender}
+                senderId = {post.reciever}
                 recevierId = {post.reciever}
                 content = {post.content}
+                url = {post.url}
                 />
             </Card>
           </Box>
