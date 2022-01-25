@@ -1,8 +1,8 @@
 import { Avatar } from "@mui/material";
 
-export default function PostListItem({ id, senderId, content, onClick, url }) {
+export default function SentListItem({ id, senderId, content, url }) {
   return (
-    <div onClick={() => onClick(id, senderId)} style={{display: "flex", flexDirection: "column", margin: "1rem"}}>
+    <div style={{display: "flex", flexDirection: "column", margin: "1rem"}}>
       <div style={{display: "flex"}}>
         <div style={{display: "flex", flexDirection: "column", width : 300}}>
           <div>
