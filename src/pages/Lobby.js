@@ -142,6 +142,7 @@ function Lobby({ userId, setUserId }) {
     setPostList([]);
     setSentMailCount(0)
     setPostSendList([])
+
     const res1 = await axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
     res1.data.forEach(async (post) => {
       if(post.isread==0)count++;
@@ -190,6 +191,7 @@ function Lobby({ userId, setUserId }) {
   const inboxContents = () => {
     if(postList.length != 0) {
       return postList.map(post =>{
+        // console.log(post);
         return (
           <Box sx={{ minWidth: 275}}>
             <Card variant="outlined">
@@ -211,7 +213,6 @@ function Lobby({ userId, setUserId }) {
   const sentContents = () => {
     if(postSendList.length != 0) {
       return postSendList.map(post =>{
-        console.log(post)
         return (
           <Box sx={{ minWidth: 275}}>
             <Card variant="outlined">

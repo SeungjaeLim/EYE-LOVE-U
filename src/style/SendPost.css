@@ -1,0 +1,84 @@
+.Lobby {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    background-image: url("../../public/PinkBackGround.png");
+    background-repeat : no-repeat;
+    background-size : cover;
+  }
+  
+  .backgroundwrap{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    animation: motion 0.3s linear 0s infinite alternate;
+    margin-top: 0;
+  }
+
+  .Background1 {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    padding: 5rem;
+    border-radius: 4rem;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .Background2 {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; 
+    padding: 5rem;
+    border-radius: 4rem;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  
+
+  .textbox{
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    animation: motionrev 0.3s linear 0s infinite alternate;
+    margin-top: 0;
+    
+    /* animation: motionlr 0.3s linear 0s infinite alternate;
+    margin-top: 0; */
+  }
+  
+  .LoginButtonForm1 {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .arrow{
+      margin-top: 70%;
+      animation: scale1 0.3s infinite alternate;
+      transform-origin: 50% 50%;
+  }
+
+  .sendposttext{
+      margin-top: 2rem;
+  }
+
+    @keyframes motion {
+    0% {margin-top: 0px;}
+    100% {margin-top: 10px;}
+    }
+    
+    @keyframes motionrev {
+        0% {padding-top: 0px;}
+        100% {padding-top: 10px;}
+        }
+
+    @keyframes scale1 {
+        0%   { transform: scale(0.95) }
+        100%  { transform: scale(1) }
+    }
