@@ -1,17 +1,16 @@
-export default function PostListItem({ senderId, content, onClick }) {
+import { Avatar } from "@mui/material";
 
+export default function PostListItem({ id, senderId, content, onClick, url }) {
   return (
-    <div onClick={() => onClick(senderId)} style={{display: "flex", flexDirection: "column", margin: "1rem"}}>
+    <div onClick={() => onClick(id, senderId)} style={{display: "flex", flexDirection: "column", margin: "1rem"}}>
       <div style={{display: "flex"}}>
-        <img style={{ objectFit :"cover", width: "7rem", height: "7rem"}} />
-        <div style={{display: "flex", flexDirection: "column"}}>
+        <div>
+          <Avatar sx={{ width: 100, height: 100}} src={url}/>
+          <div style={{textAlign : "center"}}>{senderId}</div>
+        </div>
+        <div style={{display: "flex", flexDirection: "column", width : 300}}>
           <div>
-            <div>{senderId}</div>
-            <br></br>
-            <div>{content}</div>
-          </div>
-          <div>
-            <div></div>
+            <div style={{padding : "10px"}}>{content}</div>
           </div>
         </div>
       </div>

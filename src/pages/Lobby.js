@@ -27,6 +27,8 @@ import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
 import "../style/Lobby.css";
 import { Badge } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { Card } from '@material-ui/core';
+import { margin } from '@mui/system';
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -130,25 +132,31 @@ function Lobby({ userId, setUserId }) {
 
   }, [userId]);
 
-  const setInbox = ()=> {
+  const setInbox = async () => {
     let count=0;
     let sentCount = 0;
+    let templist = [];
     setMailCount(0);
     setPostList([]);
     setSentMailCount(0)
     setPostSendList([])
-    axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
-    .then(res => {
-      setPostList(res.data)
-      res.data.map(post=>{
-        if(post.isread==0)count++;
-      })
-    }).finally(()=>{
-      setMailCount(count);
-    });
+    const res = await axios.get(`${API_BASE}/post/inbox?user_id=${window.sessionStorage.getItem('userId')}`)
+    res.data.forEach(async (post) => {
+      if(post.isread==0)count++;
+      const url = await getProfile(post.sender)
+      post.url=url;
+      templist=[...templist, post]
+      setPostList(templist)
+      console.log(url);
+      console.log(templist);
+      console.log(postList);
+      
+    })
+    console.log(templist)
+    setMailCount(count);
+
     axios.get(`${API_BASE}/post/sent?user_id=${window.sessionStorage.getItem('userId')}`)
     .then(res => {
-      console.log(res.data)
       setPostSendList(res.data)
       res.data.map(post=>{
         if(post.isread==0)sentCount++;
@@ -158,8 +166,9 @@ function Lobby({ userId, setUserId }) {
     });
   }
 
-  const onPostClick = (senderId) => {
+  const onPostClick = (id, senderId) => {
     if(window.confirm(`${senderId}에게 답장하시겠습니까?`)) {
+      //id 읽음처리
       axios.post(`${API_BASE}/post/send`, {
         'sender': userId,
         'recevier': senderId,
@@ -174,19 +183,30 @@ function Lobby({ userId, setUserId }) {
     }
   }
 
+  const getProfile = async (name) => {
+    const result = await axios.get(`${API_BASE}/api/download?user_id=${name}`,{ responseType: 'arraybuffer' })
+    let blob = new Blob([result.data], { type: "image/jpeg" });
+    return window.URL.createObjectURL(blob);
+  }
+
   const inboxContents = () => {
     if(mailCount != 0) {
       return postList.map(post =>{
+        // console.log(post);
         return (
-          <ListItem key={post.id}>
-            <PostListItem
-              onClick={onPostClick}
-              id = {post.mail_id}
-              senderId = {post.sender}
-              recevierId = {post.reciever}
-              content = {post.content}
-              />
-          </ListItem>);
+          <Box sx={{ minWidth: 275}}>
+            <Card variant="outlined">
+              <PostListItem
+                onClick={onPostClick}
+                id = {post.mail_id}
+                senderId = {post.sender}
+                recevierId = {post.reciever}
+                content = {post.content}
+                url = {post.url}
+                />
+            </Card>
+          </Box>
+          );
       });
     }
     return <div>누구에게도 선택받지 못했습니다</div>
@@ -194,16 +214,18 @@ function Lobby({ userId, setUserId }) {
   const sentContents = () => {
     if(sentMailCount != 0) {
       return postSendList.map(post =>{
-        console.log(post)
         return (
-          <ListItem key={post.id}>
-            <PostListItem
-              id = {post.mail_id}
-              senderId = {post.reciever}
-              recevierId = {post.reciever}
-              content = {post.content}
-              />
-          </ListItem>);
+          <Box sx={{ minWidth: 275}}>
+            <Card variant="outlined">
+              <PostListItem
+                id = {post.mail_id}
+                senderId = {post.sender}
+                recevierId = {post.reciever}
+                content = {post.content}
+                />
+            </Card>
+          </Box>
+          );
       });
     }
     else {
