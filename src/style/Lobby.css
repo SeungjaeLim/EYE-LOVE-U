@@ -126,3 +126,6 @@
   100% {margin-top: 10px;}
 }
   
+.PostListItemItem:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}

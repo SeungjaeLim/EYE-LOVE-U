@@ -196,18 +196,21 @@ function Lobby({ userId, setUserId }) {
       return postList.map(post =>{
         // console.log(post);
         return (
-          <Box sx={{ minWidth: 275}}>
-            <Card variant="outlined">
-              <PostListItem
-                onClick={onPostClick}
-                id = {post.mail_id}
-                senderId = {post.sender}
-                recevierId = {post.reciever}
-                content = {post.content}
-                url = {post.url}
-                />
-            </Card>
-          </Box>
+          
+            <Box sx={{ minWidth: 275}}>
+              <Card variant="outlined">
+              <div className='PostListItemItem'>
+                <PostListItem
+                  onClick={onPostClick}
+                  id = {post.mail_id}
+                  senderId = {post.sender}
+                  recevierId = {post.reciever}
+                  content = {post.content}
+                  url = {post.url}
+                  />
+                </div>
+              </Card>
+            </Box>
           );
       });
     }
@@ -217,17 +220,19 @@ function Lobby({ userId, setUserId }) {
     if(postSendList.length != 0) {
       return postSendList.map(post =>{
         return (
-          <Box sx={{ minWidth: 275}}>
-            <Card variant="outlined">
-              <SentListItem
-                id = {post.mail_id}
-                senderId = {post.reciever}
-                recevierId = {post.reciever}
-                content = {post.content}
-                url = {post.url}
-                />
-            </Card>
-          </Box>
+            <Box sx={{ minWidth: 275}}>
+              <Card variant="outlined">
+              <div className='PostListItemItem'>
+                <SentListItem
+                  id = {post.mail_id}
+                  senderId = {post.reciever}
+                  recevierId = {post.reciever}
+                  content = {post.content}
+                  url = {post.url}
+                  />
+                </div>
+              </Card>
+            </Box>
           );
       });
     }
