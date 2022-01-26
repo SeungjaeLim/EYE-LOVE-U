@@ -36,6 +36,9 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 const Transition = React.forwardRef(function Transition(props, ref){
   return <Slide direction='left' ref={ref} {...props} />;
 })
+const TransitionMypage = React.forwardRef(function Transition(props, ref){
+  return <Slide direction='up' ref={ref} {...props} />;
+})
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -248,7 +251,7 @@ function Lobby({ userId, setUserId }) {
       <Dialog style={{ fontFamily: "pretty"}}
         open={profileOpen}
         onClose={onProfileClose}
-        TransitionComponent={Transition}
+        TransitionComponent={TransitionMypage}
         aria-describedby="alert-dialog-slide-description" >
         <div className='LobbyUserStatus'>
           <div className='LobbyUserStatusClose'>
@@ -258,10 +261,10 @@ function Lobby({ userId, setUserId }) {
           <div className="LobbyUserStatusId">{userInfo.id}</div>
           <div className="LobbyUserStatusOther">
             <div className="LobbyUserStatusOtherStat">
-              <div>{userInfo.phoneNumber}</div>
+              <div>{userInfo.sex+'성'}</div>
             </div>
             <div className="LobbyUserStatusOtherStat">
-              <div>{userInfo.sex+'성'}</div>
+              <div>{userInfo.phoneNumber}</div>
             </div>
           </div>
         </div>
@@ -284,7 +287,7 @@ function Lobby({ userId, setUserId }) {
         <CloseIcon onClick={() => setListOpen(false)}/>
         
         <Box style={{ fontFamily: "pretty"}} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs style={{ fontFamily: "pretty"}} value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs  variant="fullWidth" textColor="secondary" indicatorColor="secondary" style={{ fontFamily: "pretty"}} value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab style={{ fontFamily: "pretty"}} label="받은 편지함" {...a11yProps(0)} />
             <Tab style={{ fontFamily: "pretty"}} label="보낸 편지함" {...a11yProps(1)} />
           </Tabs>
