@@ -110,15 +110,15 @@ function SendPost({ userId, selectedId }) {
           sx={{ width: 350, height: 350}}
           src={myimage}
           />
-        <div className = 'sendposttext'> <span> 내 ID : </span>{senderInfo.id} </div>
-        <div className = 'sendposttext'> <span> 내 전화번호 : </span> {senderInfo.phoneNumber}</div>
+        <div className = 'sendposttext'> {senderInfo.id} </div>
+        <div className = 'sendposttext'> {senderInfo.phoneNumber}</div>
         </div>
 
         <div className='textbox'>
           <form onSubmit={onSendMail}>
             <div className='arrow'><img src={'arrow.png'} /></div>
-            <div className='LoginButtonForm1' ><CustomInput style={{ fontFamily: "pretty"}} name="message" aria-label="Demo input" placeholder="Type something..." /></div>
-            <div className='LoginButtonForm1'><Button style={{ fontFamily: "pretty"}} variant='outlined' type='submit'>쪽지 보내기</Button></div>
+            <div className='LoginButtonForm1' ><CustomInput style={{ fontFamily: "pretty"}} name="message" aria-label="Demo input" placeholder="message" /></div>
+            <div className='LoginButtonForm1'><Button style={{ fontFamily: "pretty"}} color="secondary" variant='outlined' type='submit'>Send Message</Button></div>
           </form>
         </div>
         
@@ -127,7 +127,7 @@ function SendPost({ userId, selectedId }) {
           sx={{ width: 350, height: 350}}
           src={yourimage}
           />
-         <div className = 'sendposttext'> <span> 상대방 ID : </span> {yourid} </div>
+         <div className = 'sendposttext'> {yourid} </div>
         </div>
       </div>
 
