@@ -37,9 +37,9 @@ export default function ManMatching( {setSelectedId} ) {
 
     setImage();
 
-    // webgazer.showPredictionPoints(false) 
-    // webgazer.setGazeListener((data, clock)=>{
-    // }).begin()
+    webgazer.showPredictionPoints(false) 
+    webgazer.setGazeListener((data, clock)=>{
+    }).begin()
 
   }, [])
 
@@ -62,46 +62,46 @@ export default function ManMatching( {setSelectedId} ) {
   }
   
   useEffect(()=>{
-      // webgazer.setGazeListener((data, clock)=>{
-      //   if(data == null)
-      //     return;
-      //   if(data.y > pictures1[0] && data.y < pictures1[1] && data.x >pictures1[2] && data.x < pictures1[3]){
-      //     cnt1.current += 1;
-      //     if(cnt1.current > 10 ){
-      //       setSelectedId(idlist[0])
-      //       webgazer.pause()
-      //       window.sessionStorage.setItem('selectedId', idlist[0]);
-      //       window.location.replace('/sendpost')
-      //     }
-      //   }
-      //   else if(data.y > pictures2[0] && data.y < pictures2[1] && data.x >pictures2[2] && data.x < pictures2[3]){
-      //     cnt2.current += 1;
-      //     if( cnt2.current > 10 ){
-      //       setSelectedId(idlist[1])
-      //       webgazer.pause()
-      //       window.sessionStorage.setItem('selectedId', idlist[1]);
-      //       window.location.replace('/sendpost')
-      //     }
-      //   }
-      //   else if(data.y > pictures3[0] && data.y < pictures3[1] && data.x >pictures3[2] && data.x < pictures3[3]){
-      //     cnt3.current += 1;
-      //     if( cnt3.current > 10 ){
-      //       setSelectedId(idlist[2])
-      //       webgazer.pause()
-      //       window.sessionStorage.setItem('selectedId', idlist[2]);
-      //       window.location.replace('/sendpost')
-      //     }
-      //   }
-      //   else if(data.y > pictures4[0] && data.y < pictures4[1] && data.x >pictures4[2] && data.x < pictures4[3]){
-      //     cnt4.current += 1;
-      //     if( cnt4.current > 10 ){
-      //       setSelectedId(idlist[3])
-      //       webgazer.pause()
-      //       window.sessionStorage.setItem('selectedId', idlist[3]);
-      //       window.location.replace('/sendpost')
-      //     }
-      //   }
-      // }).begin()
+      webgazer.setGazeListener((data, clock)=>{
+        if(data == null)
+          return;
+        if(data.y > pictures1[0] && data.y < pictures1[1] && data.x >pictures1[2] && data.x < pictures1[3]){
+          cnt1.current += 1;
+          if(cnt1.current > 10 ){
+            setSelectedId(idlist[0])
+            webgazer.pause()
+            window.sessionStorage.setItem('selectedId', idlist[0]);
+            window.location.replace('/sendpost')
+          }
+        }
+        else if(data.y > pictures2[0] && data.y < pictures2[1] && data.x >pictures2[2] && data.x < pictures2[3]){
+          cnt2.current += 1;
+          if( cnt2.current > 10 ){
+            setSelectedId(idlist[1])
+            webgazer.pause()
+            window.sessionStorage.setItem('selectedId', idlist[1]);
+            window.location.replace('/sendpost')
+          }
+        }
+        else if(data.y > pictures3[0] && data.y < pictures3[1] && data.x >pictures3[2] && data.x < pictures3[3]){
+          cnt3.current += 1;
+          if( cnt3.current > 10 ){
+            setSelectedId(idlist[2])
+            webgazer.pause()
+            window.sessionStorage.setItem('selectedId', idlist[2]);
+            window.location.replace('/sendpost')
+          }
+        }
+        else if(data.y > pictures4[0] && data.y < pictures4[1] && data.x >pictures4[2] && data.x < pictures4[3]){
+          cnt4.current += 1;
+          if( cnt4.current > 10 ){
+            setSelectedId(idlist[3])
+            webgazer.pause()
+            window.sessionStorage.setItem('selectedId', idlist[3]);
+            window.location.replace('/sendpost')
+          }
+        }
+      }).begin()
   })
 
   return (

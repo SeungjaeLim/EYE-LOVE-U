@@ -37,6 +37,9 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 const Transition = React.forwardRef(function Transition(props, ref){
   return <Slide direction='left' ref={ref} {...props} />;
 })
+const TransitionMypage = React.forwardRef(function Transition(props, ref){
+  return <Slide direction='up' ref={ref} {...props} />;
+})
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -180,6 +183,7 @@ function Lobby({ userId, setUserId }) {
       })
       .then(res => {
         setAlertOpen(true);
+        setRoomlist();
       })
       .catch(err =>{
         console.log(err);
@@ -272,7 +276,7 @@ function Lobby({ userId, setUserId }) {
       <Dialog
         open={profileOpen}
         onClose={onProfileClose}
-        TransitionComponent={Transition}
+        TransitionComponent={TransitionMypage}
         aria-describedby="alert-dialog-slide-description" >
         <div className='LobbyUserStatus'>
           <div className='LobbyUserStatusClose'>
@@ -282,10 +286,10 @@ function Lobby({ userId, setUserId }) {
           <div className="LobbyUserStatusId">{userInfo.id}</div>
           <div className="LobbyUserStatusOther">
             <div className="LobbyUserStatusOtherStat">
-              <div>{userInfo.phoneNumber}</div>
+              <div>{userInfo.sex+'성'}</div>
             </div>
             <div className="LobbyUserStatusOtherStat">
-              <div>{userInfo.sex+'성'}</div>
+              <div>{userInfo.phoneNumber}</div>
             </div>
           </div>
         </div>
@@ -307,10 +311,10 @@ function Lobby({ userId, setUserId }) {
         onClose={() => setListOpen(false)}>
         <CloseIcon onClick={() => setListOpen(false)}/>
         
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="받은 편지함" {...a11yProps(0)} />
-            <Tab label="보낸 편지함" {...a11yProps(1)} />
+        <Box style={{ fontFamily: "pretty"}} sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs  variant="fullWidth" textColor="secondary" indicatorColor="secondary" style={{ fontFamily: "pretty"}} value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab style={{ fontFamily: "pretty"}} label="받은 편지함" {...a11yProps(0)} />
+            <Tab style={{ fontFamily: "pretty"}} label="보낸 편지함" {...a11yProps(1)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
@@ -347,7 +351,7 @@ function Lobby({ userId, setUserId }) {
         </div>
       </div>
       <Dialog open={alertOpen}>
-        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
+        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >개인 채팅을 하실 수 있습니다.</DialogTitle>
         <DialogActions>
           <Button onClick={() => {
             setAlertOpen(false);

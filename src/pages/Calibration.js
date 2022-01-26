@@ -66,13 +66,13 @@ export default function Calibration() {
           </div>
           <div className='cell1'>
             <div className = 'startcali'>
-              <span> 이 단계는 사용자의 환경에 모델을 최적화 시키는 과정입니다.<br/>무작위로 나타나는 버튼과 빨간 점의 거리가 가까워지면 버튼을 눌러주세요.</span>
+              <span className='startText'> 이 단계는 사용자의 환경에<br/>모델을 최적화 시키는 과정입니다.<br/><br/>무작위로 나타나는 버튼과 <br/>빨간 점의 거리가 가까워지면 <br/>버튼을 눌러주세요.</span>
               <div className = 'start'>
-                <Button style={{ fontFamily: "pretty"}} onClick = {startCalibration} color="secondary" variant='outlined' type='button' > Start Calibration </Button>
+                <Button style={{ fontFamily: "pretty", marginTop: "1rem"}} onClick = {startCalibration} color="secondary" variant='outlined' type='button' > Start Calibration </Button>
               </div>
             </div>
             <div className='goToMatching'>
-              <button style={{ fontFamily: "pretty"}} onClick={goToMatching}> 매칭 시작하기 </button>
+              <Button style={{ fontFamily: "pretty"}} onClick={goToMatching} color="secondary" variant='outlined' type='button' > Start Matching </Button>
             </div>
           </div>
           <div className='cell'>
