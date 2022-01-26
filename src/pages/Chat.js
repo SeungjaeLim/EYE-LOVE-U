@@ -28,6 +28,7 @@ const Chat = ({ roomName, userName }) => {
     });
   }
 
+  console.log(myInfo);
   return (
     <div>
       {currentSocket ? (

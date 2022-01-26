@@ -23,7 +23,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import Button from '@mui/material/Button';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
-import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
+import LocationSearchingIcon from '@mui/icons-material/LocationSearching'; 
+import Chat from './Chat'
 
 import "../style/Lobby.css";
 import { Badge } from '@mui/material';
@@ -90,6 +91,8 @@ function Lobby({ userId, setUserId }) {
   const [ listOpen, setListOpen ] = useState(false);
   const [ profileOpen, setProfileOpen ] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [ roomName  ,  setRoom  ] = useState('all');
+  const [ roomlist  ,  setRoomlist  ] = useState([]);
 
   const onClick = (target) => {
     navigate(`/${target}`);
@@ -130,6 +133,7 @@ function Lobby({ userId, setUserId }) {
     })
     
     setInbox();
+    setChat();
 
   }, [userId]);
 
@@ -166,12 +170,13 @@ function Lobby({ userId, setUserId }) {
   }
 
   const onPostClick = (id, senderId) => {
-    if(window.confirm(`${senderId}에게 답장하시겠습니까?`)) {
+    if(window.confirm(`${senderId}님과 매칭 하시겠습니까?`)) {
       //id 읽음처리
-      axios.post(`${API_BASE}/post/send`, {
-        'sender': userId,
-        'recevier': senderId,
-        'content': userInfo.phoneNumber
+      const male = window.sessionStorage.getItem('sex')=='남' ? window.sessionStorage.getItem('userId') : senderId;
+      const female = window.sessionStorage.getItem('sex')=='남' ? senderId : window.sessionStorage.getItem('userId');
+      axios.post(`${API_BASE}/chat/match`, {
+        'male': male,
+        'female': female,
       })
       .then(res => {
         setAlertOpen(true);
@@ -197,7 +202,7 @@ function Lobby({ userId, setUserId }) {
             <Card variant="outlined">
               <PostListItem
                 onClick={onPostClick}
-                id = {post.mail_id}
+                id = {post.reciever}
                 senderId = {post.sender}
                 recevierId = {post.reciever}
                 content = {post.content}
@@ -236,25 +241,44 @@ function Lobby({ userId, setUserId }) {
   const showList = () => {
     setListOpen(true);
   }
+  const setChat = async () => {
+    let list = []
+    const res = await axios.get(`${API_BASE}/chat/get?user_id=${window.sessionStorage.getItem('userId')}`)
+    console.log(res);
+    await res.data.map(couple => {
+      const url = couple.male + couple.female;
+      console.log(url)
+      list = [...list,url];
+    });
+    console.log(list);
+    setRoomlist(list);
+  }
+  const chatRoom = () => {
+    return roomlist.map(couple => {
+      return(
+        <Button onClick={()=>{console.log(couple); setRoom(couple)}}>{couple}</Button>
+      )
+    });
+  }
 
   return (
     <div className='Lobby'>
       <div className='Background'>
-      <Avatar style={{ fontFamily: "pretty"}}
+      <Avatar
         sx={{ width: 350, height: 350}}
         className='LobbyProfileIcon'
         onClick={onProfileClick}
         src={profileImg}/>
-      <Dialog style={{ fontFamily: "pretty"}}
+      <Dialog
         open={profileOpen}
         onClose={onProfileClose}
         TransitionComponent={Transition}
         aria-describedby="alert-dialog-slide-description" >
         <div className='LobbyUserStatus'>
           <div className='LobbyUserStatusClose'>
-            <CloseIcon style={{ fontFamily: "pretty"}} onClick={onProfileClose}/>
+            <CloseIcon onClick={onProfileClose}/>
           </div>
-          <Avatar style={{ fontFamily: "pretty"}} className="LobbyUserStatusImg" src={profileImg} sx={{ width: 100, height: 100 }}/>
+          <Avatar className="LobbyUserStatusImg" src={profileImg} sx={{ width: 100, height: 100 }}/>
           <div className="LobbyUserStatusId">{userInfo.id}</div>
           <div className="LobbyUserStatusOther">
             <div className="LobbyUserStatusOtherStat">
@@ -267,32 +291,32 @@ function Lobby({ userId, setUserId }) {
         </div>
       </Dialog>
       <div className='PostBox'>
-        <StyledBadge style={{ fontFamily: "pretty"}}
+        <StyledBadge 
             badgeContent={mailCount}
             color="secondary">
-          <MailIcon style={{ fontFamily: "pretty"}}
+          <MailIcon
             style={{fill: "white"}}
             sx={{ width: 100, height: 100 }}
             onClick={() => showList()} />
         </StyledBadge>
       </div>
 
-      <Dialog style={{ fontFamily: "pretty"}}
+      <Dialog
         open={listOpen}
         TransitionComponent={Transition}
         onClose={() => setListOpen(false)}>
         <CloseIcon onClick={() => setListOpen(false)}/>
         
-        <Box style={{ fontFamily: "pretty"}} sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs style={{ fontFamily: "pretty"}} value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab style={{ fontFamily: "pretty"}} label="받은 편지함" {...a11yProps(0)} />
-            <Tab style={{ fontFamily: "pretty"}} label="보낸 편지함" {...a11yProps(1)} />
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            <Tab label="받은 편지함" {...a11yProps(0)} />
+            <Tab label="보낸 편지함" {...a11yProps(1)} />
           </Tabs>
         </Box>
-        <TabPanel style={{ fontFamily: "pretty"}} value={value} index={0}>
+        <TabPanel value={value} index={0}>
           {inboxContents()}
         </TabPanel>
-        <TabPanel style={{ fontFamily: "pretty"}} value={value} index={1}>
+        <TabPanel value={value} index={1}>
           {sentContents()}
         </TabPanel>
         
@@ -323,14 +347,21 @@ function Lobby({ userId, setUserId }) {
         </div>
       </div>
       <Dialog open={alertOpen}>
-        <DialogTitle style={{ display: "flex", justifyContent: "center", fontFamily: "pretty"}} >답장을 보냈습니다.</DialogTitle>
+        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
         <DialogActions>
-          <Button style={{ fontFamily: "pretty"}} onClick={() => {
+          <Button onClick={() => {
             setAlertOpen(false);
             navigate('/lobby');
           }}>확인</Button>
         </DialogActions>
       </Dialog>
+      </div>
+
+      <div>
+        {chatRoom()}
+      </div>
+      <div>
+        <Chat userName={ window.sessionStorage.getItem('userId') } roomName={ roomName }></Chat>
       </div>
     </div>
   ); 
