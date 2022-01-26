@@ -323,9 +323,9 @@ function Lobby({ userId, setUserId }) {
         </div>
       </div>
       <Dialog open={alertOpen}>
-        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >답장을 보냈습니다.</DialogTitle>
+        <DialogTitle style={{ display: "flex", justifyContent: "center", fontFamily: "pretty"}} >답장을 보냈습니다.</DialogTitle>
         <DialogActions>
-          <Button onClick={() => {
+          <Button style={{ fontFamily: "pretty"}} onClick={() => {
             setAlertOpen(false);
             navigate('/lobby');
           }}>확인</Button>

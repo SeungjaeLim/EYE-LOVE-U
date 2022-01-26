@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import { useInput } from '@mui/base';
 import { styled } from '@mui/system';
-import "../style/Lobby.css";
+import "../style/SendPost.css";
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 const blue = {
@@ -106,8 +106,8 @@ function SendPost({ userId, selectedId }) {
       <div className = 'backgroundwrap'>
         <div className='Background1'>
 
-        <Avatar className = 'sendposttext'
-          sx={{ width: 300, height: 300}}
+        <Avatar style={{ fontFamily: "pretty"}} className = 'sendposttext'
+          sx={{ width: 350, height: 350}}
           src={myimage}
           />
         <div className = 'sendposttext'> <span> 내 ID : </span>{senderInfo.id} </div>
@@ -116,16 +116,15 @@ function SendPost({ userId, selectedId }) {
 
         <div className='textbox'>
           <form onSubmit={onSendMail}>
-            {/* <div><input name="message"></input></div> */}
-            <div className='LoginButtonForm' ><CustomInput name="message" aria-label="Demo input" placeholder="Type something..." /></div>
-            <div className='LoginButtonForm'><Button variant='outlined' type='submit'>쪽지 보내기</Button></div>
-            {/* <div className='arrow'><img src={'newarrow.png'} /></div> */}
+            <div className='arrow'><img src={'arrow.png'} /></div>
+            <div className='LoginButtonForm1' ><CustomInput style={{ fontFamily: "pretty"}} name="message" aria-label="Demo input" placeholder="Type something..." /></div>
+            <div className='LoginButtonForm1'><Button style={{ fontFamily: "pretty"}} variant='outlined' type='submit'>쪽지 보내기</Button></div>
           </form>
         </div>
         
         <div className='Background2'>
         <Avatar
-          sx={{ width: 300, height: 300}}
+          sx={{ width: 350, height: 350}}
           src={yourimage}
           />
          <div className = 'sendposttext'> <span> 상대방 ID : </span> {yourid} </div>
@@ -133,9 +132,9 @@ function SendPost({ userId, selectedId }) {
       </div>
 
       <Dialog open={alertOpen}>
-        <DialogTitle style={{ display: "flex", justifyContent: "center"}} >쪽지를 보냈습니다.</DialogTitle>
+        <DialogTitle style={{ display: "flex", justifyContent: "center", fontFamily: "pretty"}} >쪽지를 보냈습니다.</DialogTitle>
         <DialogActions>
-          <Button onClick={() => {
+          <Button style={{ fontFamily: "pretty"}} onClick={() => {
             setAlertOpen(false);
             navigate('/lobby');
           }}>확인</Button>
