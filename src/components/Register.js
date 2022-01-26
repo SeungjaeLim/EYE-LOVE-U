@@ -50,8 +50,13 @@ function Register() {
         const formData = new FormData();
         formData.append('file', img);
         // 서버의 upload API 호출
+<<<<<<< HEAD
         axios.post(`${API_BASE}/api/upload`, formData).then(res =>{
             axios.post(`${API_BASE}/auth/register`, {
+=======
+        axios.post("http://143.248.192.69:8080/api/upload", formData).then(res =>{
+            axios.post('http://143.248.192.69:8080/auth/register', {
+>>>>>>> 9c9e4e68bdd37628454a64481c72133164cbb92c
                 'user_id': inputId,
                 'password': inputPw,
                 'profileImg':res.data.url,

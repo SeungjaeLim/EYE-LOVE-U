@@ -5,4 +5,5 @@ export { default as Lobby } from './Lobby.js';
 export { default as ManMatching } from './ManMatching.js';
 export { default as WomanMatching } from './WomanMatching.js';
 export { default as SendPost } from './SendPost.js';
+// export { default as Chat } from './Chat.js';
 

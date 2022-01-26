@@ -1,5 +1,6 @@
 import './App.css';
-import { Auth, Register, Calibration, Lobby, ManMatching, WomanMatching, SendPost} from './pages';
+import { Auth, Register, Calibration, Lobby, ManMatching, WomanMatching, SendPost } from './pages';
+import Chat from './pages/Chat'
 import {useRoutes} from 'react-router-dom';
 import {useState} from 'react';
 
@@ -14,7 +15,8 @@ function App() {
     {path: '/lobby', element: <Lobby userId={userId} setUserId={setUserId} />},
     {path: '/manmatching', element: <ManMatching setSelectedId={setSelectedId}/>},
     {path: '/wonmanmatching', element: <WomanMatching/>},
-    {path: '/sendpost', element: <SendPost selectedId={selectedId} userId={userId} />}
+    {path: '/sendpost', element: <SendPost selectedId={selectedId} userId={userId} />},
+    {path: '/chat', element: <Chat userName={"test"} roomName={"123"}/>}
   ])
   
   
