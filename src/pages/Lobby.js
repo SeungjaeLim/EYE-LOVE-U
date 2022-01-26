@@ -330,7 +330,7 @@ function Lobby({ userId, setUserId }) {
           <div className='MatText'>Find Love</div>
         </div>
       </div>
-      <Dialog open={alertOpen}>
+      <Dialog style={{ fontFamily: "pretty"}} open={alertOpen}>
         <DialogTitle style={{ display: "flex", justifyContent: "center", fontFamily: "pretty"}} >답장을 보냈습니다.</DialogTitle>
         <DialogActions>
           <Button style={{ fontFamily: "pretty"}} onClick={() => {
