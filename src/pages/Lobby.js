@@ -263,14 +263,18 @@ function Lobby({ userId, setUserId }) {
   }
   const chatRoom = () => {
     return roomlist.map(couple => {
+      const name = couple.replace(window.sessionStorage.getItem('userId'),'')
       return(
-        <Button onClick={()=>{console.log(couple); setRoom(couple)}}>{couple}</Button>
+        <Button style={{ marginTop: "1rem", fontFamily: "pretty", width:"10rem"}} color="secondary" variant='outlined' type='button' onClick={()=>{console.log(couple); setRoom(couple)}}>{name}</Button>
       )
     });
   }
 
   return (
     <div className='Lobby'>
+      <div className='chatbackground' > 
+        <Chat userName={ window.sessionStorage.getItem('userId') } roomName={ roomName }></Chat>
+      </div>
       <div className='Background'>
       <Avatar
         sx={{ width: 350, height: 350}}
@@ -359,17 +363,14 @@ function Lobby({ userId, setUserId }) {
         <DialogActions>
           <Button onClick={() => {
             setAlertOpen(false);
-            navigate('/lobby');
+            window.location.replace('/lobby');
           }}>확인</Button>
         </DialogActions>
       </Dialog>
       </div>
 
-      <div>
+      <div className='buttonbackground' >
         {chatRoom()}
-      </div>
-      <div>
-        <Chat userName={ window.sessionStorage.getItem('userId') } roomName={ roomName }></Chat>
       </div>
     </div>
   ); 

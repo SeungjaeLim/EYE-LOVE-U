@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./ChatInput.css";
 
 export const ChatLog = ({ socket }) => {
 
@@ -22,11 +23,10 @@ export const ChatLog = ({ socket }) => {
   }, [socket]);
 
   return (
-    <div>
+    <div className="chatlogbox">
       {msgList.map((msg, idx) => (
-        <div key={idx}>
-          <div>{msg.userName}</div>
-          <div>{msg.timeStamp}</div>
+        <div key={idx} className="chatlogbox">
+          <div className="usernamechat"> {msg.userName}</div>
           <div>{msg.msg}</div>
         </div>
       ))}

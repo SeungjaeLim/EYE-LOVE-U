@@ -12,6 +12,7 @@
 
 .Background {
   width: 19%;
+  height: 55%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,6 +20,8 @@
   padding: 3rem;
   border-radius: 4rem;
   background-color: rgba(255, 255, 255, 0.4);
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 
 .LobbyProfileIcon {
@@ -128,4 +131,29 @@
   
 .PostListItemItem:hover {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+.chatbackground {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  width: 13%;
+  height: 55%; 
+  padding: 3rem;
+  border-radius: 4rem;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.buttonbackground {
+  width: 13%;
+  height: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  padding: 3rem;
+  border-radius: 4rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  
 }

@@ -1,14 +1,24 @@
 .ChatInput-container {
-    position: absolute;
     bottom: 0rem;
     width: 100%;
   }
   
   .ChatInput-form {
+    margin-top: 0.5rem;
     display: flex;
   }
   
   .ChatInput-form input {
     flex: 1;
-    height: 2rem;
+    font-family: "pretty";
+    margin-top: 1rem;
+  }
+
+  .chatlogbox{
+    width: 15rem;
+    margin-bottom: 1rem;
+  }
+
+  .usernamechat{
+    font-weight: bold;
   }

@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import "./ChatInput.css";
 
 const ChatInput = ({ userName, socket }) => {
@@ -21,12 +23,8 @@ const ChatInput = ({ userName, socket }) => {
   return (
     <div className="ChatInput-container">
       <form className="ChatInput-form" onSubmit={handleSubmit}>
-        <input
-          placeholder="메시지를 입력하세요."
-          value={chatMessage}
-          onChange={onChatMessageChange}
-        ></input>
-        <button>전송</button>
+        <TextField style={{ fontFamily: "pretty", marginTop:"1rem", height:"1rem"}} value={chatMessage} onChange={onChatMessageChange} size="small" inputProps={{style: {fontFamily:'pretty'}}} InputLabelProps={{style: {fontFamily:'pretty'}}} color="secondary" />
+        <Button style={{ fontFamily: "pretty", marginTop:"1rem", height:"3.5rem"}} color="secondary" variant='outlined' type='submit' >전송</Button>
       </form>
      </div>
   );

@@ -106,7 +106,6 @@ export default function ManMatching( {setSelectedId} ) {
 
   return (
     <div className='Lobby'>
-      <Slide direction="up" in>
       <div className ='pictures'>
         <div className = 'picturelow'>
           <div>
@@ -135,7 +134,6 @@ export default function ManMatching( {setSelectedId} ) {
         </div>
       
       </div>
-      </Slide>
     </div>
   );
 }

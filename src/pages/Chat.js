@@ -22,6 +22,7 @@ const Chat = ({ roomName, userName }) => {
   }, []);
   
   if (currentSocket) {
+    currentSocket.off("connect");
     currentSocket.on("connect", () => {
       console.log('연결됨')
       currentSocket.emit("join", myInfo);
