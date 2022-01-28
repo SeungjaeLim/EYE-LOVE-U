@@ -16,7 +16,7 @@
 ## 로그인, 회원가입
 |login|register|
 |--|--|
-|<img src="https://user-images.githubusercontent.com/74184274/151599070-cd20e35d-8a71-4c2b-a7de-a7ad73e4c600.png">|<img src="https://user-images.githubusercontent.com/86216960/151115059-c60612f2-2a79-48c3-9f84-fa1c76f81cd6.png">|
+|<img src="https://user-images.githubusercontent.com/74184274/151599070-cd20e35d-8a71-4c2b-a7de-a7ad73e4c600.png">|<img src="https://user-images.githubusercontent.com/74184274/151599068-a5429796-c13a-40c3-9597-8121e12439f7.png">|
 
 - ID, 비밀번호, 전화번호, 성별, 사진 정보를 입력해야 회원가입을 할 수 있습니다.
 - 이후 아이디와 비밀번호를 입력해 로그인을 할 수 있습니다.
