@@ -1,9 +1,16 @@
-# EyE Love You by 성홍념, 임승재, 최준영
+# EYE Love U
+  <p>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=JavaScript&logoColor=white"/>
+  <img src="https://img.shields.io/badge/react-61DAFB?style=flat-square&logo=react&logoColor=black">
+</p>
+ <p>
+  <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=Node.js&logoColor=white"/>
+  <img src="https://img.shields.io/badge/MySQL-000000?style=flat-square&logo=MySQL&logoColor=white"/>
+  <img src="https://img.shields.io/badge/express-000000?style=flat-square&logo=express&logoColor=white">
 
-<p align="center"> <img width="50%" src="https://user-images.githubusercontent.com/86216960/151111350-0a85e1cf-dee6-4ab4-bd63-c3517b3841ed.jpg"> </p>
+</p>
 
-"EyE Love You"는 소개팅 페이지로 당신의 시선을 끄는 상대방과 매칭을 진행시켜 줍니다.
-
+> "EYE Love U"는 소개팅 페이지로 당신의 시선을 끄는 상대방과 매칭을 진행시켜 줍니다.
 
 ---
 ## 로그인, 회원가입
